@@ -31,7 +31,7 @@
  */
 
 "use strict";
-
+//字体管理js
 (function(window, undefined) {
 
 	function CFontManagerEngine()
@@ -544,6 +544,8 @@
 
 			LoadFont : function(fontFile, faceIndex, size, isBold, isItalic, needBold, needItalic, isNoSetupToManager)
 			{
+				// debugger;
+				console.log('加载字体文件(LoadFont)------',fontFile)
 				var _ext = "";
 				if (needBold)
 					_ext += "nbold";

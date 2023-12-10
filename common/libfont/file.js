@@ -126,6 +126,7 @@
 	};
 
 	var raster_memory = AscFonts.raster_memory;
+	debugger;
 
 	var FONT_ITALIC_ANGLE 	= 0.3090169943749;
 	var REND_MODE 			= AscFonts.FT_Render_Mode.FT_RENDER_MODE_NORMAL;
@@ -412,6 +413,8 @@
 
 			if (true)
 			{
+				debugger;
+				// 绘制字体到当前canvas
 				if (this.nWidth > 0 && this.nHeight > 0)
 					ctx.putImageData(raster_memory.m_oBuffer, _x, _y, 0, 0, this.nWidth, this.nHeight);
 			}
@@ -435,7 +438,8 @@
 				if (this.nWidth > 0 && this.nHeight > 0)
 					ctx.putImageData(raster_memory.m_oBuffer, _x, _y, 0, 0, this.nWidth, this.nHeight);
 			}
-
+			console.log(ctx.canvas.toDataURL());
+			debugger;
 			if (null != raster_memory.m_oBuffer)
 			{
 				var nIndexDst = 3;
@@ -455,6 +459,7 @@
 
 		draw: function (context2D, x, y)
 		{
+			debugger;
 			var nW = this.nWidth;
 			var nH = this.nHeight;
 			if (null != this.oGlyphData.TempImage)
@@ -1254,7 +1259,7 @@
 					}
 				}
 			}
-
+			console.log('第一次从这里加载CacheGlyph-->fromAlphaMask')
 			oSizes.oBitmap.fromAlphaMask(this.m_oFontManager);
 			return oSizes;
 		};
@@ -1445,7 +1450,7 @@
 
 		this.GetString2C = function(pString)
 		{
-			// Сначала мы все рассчитываем исходя только из матрицы шрифта FontMatrix
+			// Сначала мы все рассчитываем исходя только из матрицы шрифта FontMatrix  首先，我们只计算字体矩阵fontmatrix。
 			if (this.m_bIsTransform)
 				this.UpdateMatrix();
 

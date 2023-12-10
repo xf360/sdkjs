@@ -743,6 +743,7 @@
 
 	function PaintMessageLoop(interval)
 	{
+		console.log('PaintMessageLoop帧循环')
 		this.interval = interval || 40;
 		this.id = null;
 
@@ -804,6 +805,7 @@
 
 	PaintMessageLoop.prototype._animation = function()
 	{
+		// console.log('帧动画----')
 		var now = Date.now();
 		if (-1 === this.requestAnimationOldTime || (now >= (this.requestAnimationOldTime + 40)) || (now < this.requestAnimationOldTime))
 		{

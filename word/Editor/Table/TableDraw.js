@@ -42,6 +42,7 @@ CTable.prototype.ReDraw = function()
 };
 CTable.prototype.Draw = function(CurPage, pGraphics, isDrawContent)
 {
+    console.log('CTable.Draw----绘制table')
     if (CurPage < 0 || CurPage >= this.Pages.length)
         return 0;
 
@@ -76,22 +77,26 @@ CTable.prototype.Draw = function(CurPage, pGraphics, isDrawContent)
     var bIsSmartGrForcing = false;
     if (pGraphics.StartCheckTableDraw)
         bIsSmartGrForcing = pGraphics.StartCheckTableDraw();
-
+    debugger;
     //-------------------------------------------------------------------------------------
     // 1. Сначала заливаем таблицу и если есть Spacing, тогда обводим внешнюю рамку таблицы
+    // 1.首先填充表，如果有空隙，然后绘制表的外部框架
     //-------------------------------------------------------------------------------------
     this.private_DrawTableBackgroundAndOuterBorder(pGraphics, CurPage, Row_start, Row_last);
     //-------------------------------------------------------------------------------------
     // 2. Рисуем заливку всех ячеек таблицы
+    // 2.绘制表中所有单元格的填充图
     //-------------------------------------------------------------------------------------
     this.private_DrawCellsBackground(pGraphics, CurPage, Row_start, Row_last);
     //-------------------------------------------------------------------------------------
     // 3. Рисуем содержимое ячеек
+    // 3.绘制单元格内容
     //-------------------------------------------------------------------------------------
     if (false !== isDrawContent)
         this.private_DrawCellsContent(pGraphics, CurPage, Row_start, Row_last);
     //-------------------------------------------------------------------------------------
     // 4. Рисуем границы всех ячеек таблицы
+    // 4.绘制表中所有单元格的边界
     //-------------------------------------------------------------------------------------
     this.private_DrawCellsBorders(pGraphics, CurPage, Row_start, Row_last);
 

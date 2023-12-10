@@ -1328,6 +1328,9 @@ CGraphics.prototype =
 
         try
         {
+            console.log('从字体中加载汉字，汉字编码',codepoints);
+            console.log('从字体中加载汉字，字库编码',text);
+            debugger;
             _font_manager.LoadString3C(text,_x,_y,codepoints);
         }
         catch(err)
@@ -1353,7 +1356,7 @@ CGraphics.prototype =
 			}
 
             this.private_FillGlyph(pGlyph);
-
+            console.log('渲染文字：',pGlyph.oBitmap.oGlyphData.m_oCanvas.toDataURL())
             if (oldAlpha)
                 this.m_oContext.globalAlpha = oldAlpha;
         }

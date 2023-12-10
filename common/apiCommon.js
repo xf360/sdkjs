@@ -6285,6 +6285,7 @@
 			ctx.globalAlpha = this.transparent;
 			ctx.drawImage(this.image, 0, 0);
 			this.imageBase64 = canvasTransparent.toDataURL("image/png");
+			console.log('绘图：',this.imageBase64)
 			canvasTransparent = null;
 		};
 		this.EndRenderer = function()

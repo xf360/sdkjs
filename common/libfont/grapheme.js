@@ -63,8 +63,10 @@
 		GRAPHEME_BUFFER[1] += nAdvanceX;
 		GRAPHEME_BUFFER[2] += 1;
 	}
+	//绘制字形
 	function DrawGrapheme(nGraphemeId, oContext, nX, nY, nFontSize)
 	{
+		console.log('绘制字形DrawGrapheme')
 		let oGrapheme = GRAPHEMES[nGraphemeId];
 		if (!oGrapheme)
 			return;

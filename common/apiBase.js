@@ -49,6 +49,7 @@
 	/** @constructor */
 	function baseEditorsApi(config, editorId)
 	{
+		debugger;
 		this.editorId      = editorId;
 		this.isLoadFullApi = false;
         this.modulesCount  = 0;
@@ -238,6 +239,7 @@
 
 	baseEditorsApi.prototype._init                           = function()
 	{
+		debugger;
 		if (window["AscDesktopEditor"])
 			window["AscDesktopEditor"]["CreateEditorApi"](this);
 
@@ -264,9 +266,10 @@
 
 			t.sync_EndAction(c_oAscAsyncActionType.BlockInteraction, c_oAscAsyncAction.UploadImage);
 		});
-
+		debugger;
 		AscCommon.loadSdk(this._editorNameById(), function()
 		{
+			debugger;
 			t.isLoadFullApi = true;
 
 			t._onEndLoadSdk();
@@ -1139,6 +1142,7 @@
 		var t = this;
 		this.isDocumentLoadComplete = true;
 		if (!window['IS_NATIVE_EDITOR']) {
+			//触发自动保存
 			setInterval(function() {t._autoSave();}, 40);
 		}
 		this.sync_EndAction(c_oAscAsyncActionType.BlockInteraction, c_oAscAsyncAction.Open);
@@ -1323,6 +1327,7 @@
 	baseEditorsApi.prototype._onSaveCallbackInner = function () {
 	};
 	baseEditorsApi.prototype._autoSave = function () {
+		// console.log('_autoSave自动保存')
 		if (this.canSave && (!this.isViewMode || this.isLiveViewer()) && (this.canUnlockDocument || 0 !== this.autoSaveGap)) {
 			if (this.canUnlockDocument) {
 				this.lastSaveTime = new Date();
@@ -3176,6 +3181,7 @@
 	// signatures
 	baseEditorsApi.prototype.asc_AddSignatureLine2 = function(_obj)
 	{
+		debugger;
 		var _w = 50;
 		var _h = 50;
 		var _w_pix = (_w * AscCommon.g_dKoef_mm_to_pix) >> 0;

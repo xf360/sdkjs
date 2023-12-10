@@ -3204,6 +3204,7 @@
 				oCtx.drawImage(oImage.Image, 0, 0, oCanvas.width, oCanvas.height);
 				try {
 					sResult = oCanvas.toDataURL("image/png");
+					console.log('getBase64Data',sResult)
 				} catch (err) {
 					sResult = sDefaultResult;
 				}

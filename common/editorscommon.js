@@ -10042,7 +10042,7 @@
 		// Fire the loading
 		document.head.appendChild(script);
 	}
-
+	//加载sdkjs
 	function loadSdk(sdkName, onSuccess, onError)
 	{
 		if (window['AscNotLoadAllScript'])

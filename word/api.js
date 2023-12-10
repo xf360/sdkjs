@@ -34,7 +34,7 @@
 
 (function(window, document)
 {
-
+	debugger;
 	// Import
 	var g_fontApplication = null;
 
@@ -868,6 +868,8 @@
 	 */
 	function asc_docs_api(config)
 	{
+		console.log('jssdk：实例化编辑器')
+		debugger;
 		AscCommon.baseEditorsApi.call(this, config, AscCommon.c_oEditorId.Word);
 
 		/************ private!!! **************/
@@ -1271,6 +1273,8 @@ background-repeat: no-repeat;\
 
 	asc_docs_api.prototype.CreateComponents = function()
 	{
+		debugger;
+		console.log('sdkjs创建组件内容：---- CreateComponents')
 		this.asc_setSkin(this.skinObject);
 		delete this.skinObject;
 
@@ -1563,6 +1567,7 @@ background-repeat: no-repeat;\
 	};
 	asc_docs_api.prototype.OpenDocumentFromBin = function(url, gObject)
 	{
+		debugger;//从二进制打开文件
 		BeforeOpenDocument.call(this);
 
 		var openParams        = {};
@@ -7978,10 +7983,13 @@ background-repeat: no-repeat;\
 
 		if (file.bSerFormat)
 		{
+			console.log('从二进制打开文件',file)
 			this.OpenDocumentFromBin(file.url, file.data);
 		}
 		else
 		{
+			console.log('从zip打开文件',file)
+			debugger;
 			this.isOpenOOXInBrowser = this["asc_isSupportFeature"]("ooxml") && AscCommon.checkOOXMLSignature(file.data);
 			if (this.isOpenOOXInBrowser)
 			{
@@ -9470,6 +9478,8 @@ background-repeat: no-repeat;\
 
 	asc_docs_api.prototype._onEndLoadSdk = function()
 	{
+		console.log('sdk加载完成：_onEndLoadSdk')
+		debugger;
 		AscCommon.baseEditorsApi.prototype._onEndLoadSdk.call(this);
 
 		History           = AscCommon.History;
@@ -9486,6 +9496,7 @@ background-repeat: no-repeat;\
 		PasteElementsId.g_bIsDocumentCopyPaste = true;
 
 		this.CreateComponents();
+		debugger;
 		this.WordControl.Init();
 
 		if (this.tmpFontRenderingMode)
@@ -13584,6 +13595,7 @@ background-repeat: no-repeat;\
 	};
 	
 	//-------------------------------------------------------------export---------------------------------------------------
+	//导出sdk 方法
 	window['Asc']                                                       = window['Asc'] || {};
 	CAscSection.prototype['get_PageWidth']                              = CAscSection.prototype.get_PageWidth;
 	CAscSection.prototype['get_PageHeight']                             = CAscSection.prototype.get_PageHeight;

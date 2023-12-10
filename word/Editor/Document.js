@@ -1793,6 +1793,7 @@ CSelectedElementsInfo.prototype.IsFixedFormShape = function()
  */
 function CDocument(DrawingDocument, isMainLogicDocument)
 {
+	debugger;
 	CDocumentContentBase.call(this);
 
     //------------------------------------------------------------------------------------------------------------------
@@ -2341,6 +2342,7 @@ CDocument.prototype.private_UpdateFieldsOnEndLoad = function()
 };
 CDocument.prototype.Add_TestDocument               = function()
 {
+	debugger;
     this.Content   = [];
     var Text       = ["Comparison view helps you track down memory leaks, by displaying which objects have been correctly cleaned up by the garbage collector. Generally used to record and compare two (or more) memory snapshots of before and after an operation. The idea is that inspecting the delta in freed memory and reference count lets you confirm the presence and cause of a memory leak.", "Containment view provides a better view of object structure, helping us analyse objects referenced in the global namespace (i.e. window) to find out what is keeping them around. It lets you analyse closures and dive into your objects at a low level.", "Dominators view helps confirm that no unexpected references to objects are still hanging around (i.e that they are well contained) and that deletion/garbage collection is actually working."];
     var ParasCount = 50;
@@ -5547,6 +5549,7 @@ CDocument.prototype.CanDrawPage = function(nPageAbs)
  */
 CDocument.prototype.Draw                                     = function(nPageIndex, pGraphics)
 {
+	console.log('Draw--绘制页面')
     // TODO: Пока делаем обновление курсоров при каждой отрисовке. Необходимо поменять
     this.CollaborativeEditing.Update_ForeignCursorsPositions();
     //--------------------------------------------------------------------------------------------------------------
@@ -5608,12 +5611,18 @@ CDocument.prototype.Draw                                     = function(nPageInd
 
             for (var ContentPos = ColumnStartPos; ContentPos <= ColumnEndPos; ++ContentPos)
             {
+				//获取段落
+				debugger;
             	var oElement = this.Content[ContentPos];
             	if (Page.IsFlowTable(oElement) || Page.IsFrame(oElement))
             		continue;
 
 				var ElementPageIndex = this.private_GetElementPageIndex(ContentPos, nPageIndex, ColumnIndex, ColumnsCount);
+				debugger;
+				let x= window._shaohui_page;
 				this.Content[ContentPos].Draw(ElementPageIndex, pGraphics);
+				let y= window._shaohui_page;
+				debugger;
             }
 
             if (ColumnsCount > 1)
@@ -18482,8 +18491,10 @@ CDocument.prototype.controller_CanUpdateTarget = function()
 
 	return true;
 };
+//重新计算光标位置
 CDocument.prototype.controller_RecalculateCurPos = function(bUpdateX, bUpdateY, isUpdateTarget)
 {
+	console.log('CDocument--重新计算光标位置--')
 	if (this.controller_CanUpdateTarget())
 	{
 		this.private_CheckCurPage();

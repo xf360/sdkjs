@@ -75,6 +75,8 @@ var g_oSpellCheckerMarks = new CSpellCheckerMarks();
  */
 function ParaRun(Paragraph, bMathRun)
 {
+	//debugger;
+	console.log('构造ParaRun',Paragraph, bMathRun)
 	CParagraphContentWithContentBase.call(this);
 
 	this.Id        = AscCommon.g_oIdCounter.Get_NewId();  // Id данного элемента
@@ -2137,7 +2139,7 @@ ParaRun.prototype.Get_ParaPosByContentPos = function(ContentPos, Depth)
 
     return new CParaPos((LinesCount === 1 ? this.protected_GetRangesCount(0) - 1 + this.StartRange : this.protected_GetRangesCount(0) - 1), LinesCount - 1 + this.StartLine, 0, 0);
 };
-
+//重新计算CurPos
 ParaRun.prototype.Recalculate_CurPos = function(X, Y, CurrentRun, _CurRange, _CurLine, CurPage, UpdateCurPos, UpdateTarget, ReturnTarget)
 {
     var Para = this.Paragraph;
@@ -6635,6 +6637,7 @@ ParaRun.prototype.Draw_HighLights = function(PDSH)
 
 ParaRun.prototype.Draw_Elements = function(PDSE)
 {
+	console.log('run.Draw_Elements---渲染run')
     var CurLine  = PDSE.Line - this.StartLine;
     var CurRange = ( 0 === CurLine ? PDSE.Range - this.StartRange : PDSE.Range );
     var CurPage  = PDSE.Page;

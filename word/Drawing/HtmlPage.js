@@ -69,16 +69,17 @@ function CEditorPage(api)
 	this.Height = 10;
 
 	// controls
-	this.m_oBody        = null;
-	this.m_oMenu        = null;
-	this.m_oPanelRight  = null;
-	this.m_oScrollHor   = null;
-	this.m_oMainContent = null;
-	this.m_oLeftRuler   = null;
-	this.m_oTopRuler    = null;
-	this.m_oMainView    = null;
-	this.m_oEditor      = null;
-	this.m_oOverlay     = null;
+	this.m_oBody        = null;//对应id="editor_sdk"dom
+	this.m_oMenu        = null;//
+	this.m_oPanelRight  = null;//对应id="id_panel_right"  右侧滚动条
+	this.m_oScrollHor   = null;//对应 id="id_horscrollpanel" 横向滚动条
+	this.m_oMainContent = null;//对应 id="id_main" 编辑器主体
+	this.m_oLeftRuler   = null;//对应id="id_panel_left" 左侧标尺
+	this.m_oTopRuler    = null;//对应id="id_panel_top" 顶部标尺
+	this.m_oMainView    = null;//对应id="id_main_view" 编辑器主体(不包含四周滚动条及标尺)
+	this.m_oEditor      = null;//对应id="id_viewer" 编辑器canvas（正文）（不包含光标）
+	this.m_oOverlay     = null;//对应id="id_viewer_overlay" 编辑器canvas（浮动元素层，选中、控件标签等）(不包含光标)
+	
 
 	this.m_oPanelRight_buttonRulers   = null;
 	this.m_oPanelRight_vertScroll     = null;
@@ -88,6 +89,26 @@ function CEditorPage(api)
 	this.m_oLeftRuler_buttonsTabs = null;
 	this.m_oLeftRuler_vertRuler   = null;
 	this.m_oTopRuler_horRuler = null;
+
+	/*层级关系如下：
+	m_oBody
+			m_oScrollHor
+			m_oPanelRight
+				m_oPanelRight_buttonRulers
+				m_oPanelRight_buttonNextPage
+				m_oPanelRight_buttonPrevPage
+				m_oPanelRight_vertScroll
+			m_oMainContent
+				m_oLeftRuler
+					m_oLeftRuler_buttonsTabs
+					m_oLeftRuler_vertRuler
+				m_oTopRuler
+					m_oTopRuler_horRuler
+				m_oMainView
+					m_oEditor
+					m_oOverlay
+	*/
+
 
 	// reader mode
 	this.ReaderModeDivWrapper = null;
@@ -260,16 +281,20 @@ function CEditorPage(api)
 
 	this.Init = function()
 	{
+		debugger;
+		console.log('sdkjs构建编辑器编辑区')
 		this.m_oBody = AscCommon.CreateControlContainer(this.Name);
 
 		var scrollWidthMm = this.ScrollsWidthPx * g_dKoef_pix_to_mm;
 
+		console.log('sdkjs构建编辑器编辑区：---id_horscrollpanel 滚动条');
 		this.m_oScrollHor = AscCommon.CreateControlContainer("id_horscrollpanel");
 		this.m_oScrollHor.Bounds.SetParams(0, 0, scrollWidthMm, 0, false, false, true, true, -1, scrollWidthMm);
 		this.m_oScrollHor.Anchor = (g_anchor_left | g_anchor_right | g_anchor_bottom);
 		this.m_oBody.AddControl(this.m_oScrollHor);
 
 		// panel right --------------------------------------------------------------
+		console.log('sdkjs构建编辑器编辑区：---id_panel_right 右侧面板');
 		this.m_oPanelRight = AscCommon.CreateControlContainer("id_panel_right");
 		this.m_oPanelRight.Bounds.SetParams(0, 0, 1000, 0, false, true, false, true, scrollWidthMm, -1);
 		this.m_oPanelRight.Anchor = (g_anchor_top | g_anchor_right | g_anchor_bottom);
@@ -283,6 +308,7 @@ function CEditorPage(api)
 			hor_scroll.style.zIndex = -1;
 		}
 
+		console.log('sdkjs构建编辑器编辑区：---id_buttonRulers 右侧标尺');
 		this.m_oPanelRight_buttonRulers = AscCommon.CreateControl("id_buttonRulers");
 		this.m_oPanelRight_buttonRulers.Bounds.SetParams(0, 0, 1000, 1000, false, false, false, false, -1, scrollWidthMm);
 		this.m_oPanelRight_buttonRulers.Anchor = (g_anchor_left | g_anchor_top | g_anchor_right);
@@ -295,11 +321,13 @@ function CEditorPage(api)
 			_vertScrollTop                                            = 0;
 		}
 
+		console.log('sdkjs构建编辑器编辑区：---id_buttonNextPage 下一页按钮');
 		this.m_oPanelRight_buttonNextPage = AscCommon.CreateControl("id_buttonNextPage");
 		this.m_oPanelRight_buttonNextPage.Bounds.SetParams(0, 0, 1000, 1000, false, false, false, false, -1, scrollWidthMm);
 		this.m_oPanelRight_buttonNextPage.Anchor = (g_anchor_left | g_anchor_bottom | g_anchor_right);
 		this.m_oPanelRight.AddControl(this.m_oPanelRight_buttonNextPage);
 
+		console.log('sdkjs构建编辑器编辑区：---id_buttonPrevPage 上一页按钮');
 		this.m_oPanelRight_buttonPrevPage = AscCommon.CreateControl("id_buttonPrevPage");
 		this.m_oPanelRight_buttonPrevPage.Bounds.SetParams(0, 0, 1000, scrollWidthMm, false, false, false, true, -1, scrollWidthMm);
 		this.m_oPanelRight_buttonPrevPage.Anchor = (g_anchor_left | g_anchor_bottom | g_anchor_right);
@@ -313,6 +341,7 @@ function CEditorPage(api)
 			_vertScrollBottom                                           = 0;
 		}
 
+		console.log('sdkjs构建编辑器编辑区：---id_vertical_scroll 竖向滚动条');
 		this.m_oPanelRight_vertScroll = AscCommon.CreateControl("id_vertical_scroll");
 		this.m_oPanelRight_vertScroll.Bounds.SetParams(0, _vertScrollTop, 1000, _vertScrollBottom, false, true, false, true, -1, -1);
 		this.m_oPanelRight_vertScroll.Anchor = (g_anchor_left | g_anchor_top | g_anchor_right | g_anchor_bottom);
@@ -321,6 +350,7 @@ function CEditorPage(api)
 
 		// main content -------------------------------------------------------------
 		this.m_oMainContent = AscCommon.CreateControlContainer("id_main");
+		console.log('sdkjs构建编辑器编辑区：---id_main 主体区');
 		if (!this.m_oApi.isMobileVersion)
 			this.m_oMainContent.Bounds.SetParams(0, 0, scrollWidthMm, 0, false, true, true, true, -1, -1);
 		else
@@ -329,16 +359,19 @@ function CEditorPage(api)
 		this.m_oBody.AddControl(this.m_oMainContent);
 
 		// --- left ---
+		console.log('sdkjs构建编辑器编辑区：---id_panel_left 左侧面板');
 		this.m_oLeftRuler = AscCommon.CreateControlContainer("id_panel_left");
 		this.m_oLeftRuler.Bounds.SetParams(0, 0, 1000, 1000, false, false, false, false, 5, -1);
 		this.m_oLeftRuler.Anchor = (g_anchor_left | g_anchor_top | g_anchor_bottom);
 		this.m_oMainContent.AddControl(this.m_oLeftRuler);
 
+		console.log('sdkjs构建编辑器编辑区：---id_buttonTabs 按钮面板');
 		this.m_oLeftRuler_buttonsTabs = AscCommon.CreateControl("id_buttonTabs");
 		this.m_oLeftRuler_buttonsTabs.Bounds.SetParams(0, 0.8, 1000, 1000, false, true, false, false, -1, 5);
 		this.m_oLeftRuler_buttonsTabs.Anchor = (g_anchor_left | g_anchor_top | g_anchor_right);
 		this.m_oLeftRuler.AddControl(this.m_oLeftRuler_buttonsTabs);
 
+		console.log('sdkjs构建编辑器编辑区：---id_vert_ruler 标尺');
 		this.m_oLeftRuler_vertRuler = AscCommon.CreateControl("id_vert_ruler");
 		this.m_oLeftRuler_vertRuler.Bounds.SetParams(0, 7, 1000, 1000, false, true, false, false, -1, -1);
 		this.m_oLeftRuler_vertRuler.Anchor = (g_anchor_left | g_anchor_right | g_anchor_top | g_anchor_bottom);
@@ -346,17 +379,20 @@ function CEditorPage(api)
 		// ------------
 
 		// --- top ----
+		console.log('sdkjs构建编辑器编辑区：---id_panel_top 顶部标尺');
 		this.m_oTopRuler = AscCommon.CreateControlContainer("id_panel_top");
 		this.m_oTopRuler.Bounds.SetParams(5, 0, 1000, 1000, true, false, false, false, -1, 7);
 		this.m_oTopRuler.Anchor = (g_anchor_left | g_anchor_top | g_anchor_right);
 		this.m_oMainContent.AddControl(this.m_oTopRuler);
 
+		console.log('sdkjs构建编辑器编辑区：---id_hor_ruler 顶部标尺canvas');
 		this.m_oTopRuler_horRuler = AscCommon.CreateControl("id_hor_ruler");
 		this.m_oTopRuler_horRuler.Bounds.SetParams(0, 0, 1000, 1000, false, false, false, false, -1, -1);
 		this.m_oTopRuler_horRuler.Anchor = (g_anchor_left | g_anchor_right | g_anchor_top | g_anchor_bottom);
 		this.m_oTopRuler.AddControl(this.m_oTopRuler_horRuler);
 		// ------------
 
+		console.log('sdkjs构建编辑器编辑区：---id_main_view 主体区');
 		this.m_oMainView = AscCommon.CreateControlContainer("id_main_view");
 		this.m_oMainView.Bounds.SetParams(5, 7, 1000, 1000, true, true, false, false, -1, -1);
 		this.m_oMainView.Anchor = (g_anchor_left | g_anchor_right | g_anchor_top | g_anchor_bottom);
@@ -367,20 +403,24 @@ function CEditorPage(api)
 			this.scrollTop = 0;
 		};
 
+		console.log('sdkjs构建编辑器编辑区：---id_viewer 主体区canvas');
 		this.m_oEditor = AscCommon.CreateControl("id_viewer");
 		this.m_oEditor.Bounds.SetParams(0, 0, 1000, 1000, false, false, false, false, -1, -1);
 		this.m_oEditor.Anchor = (g_anchor_left | g_anchor_top | g_anchor_right | g_anchor_bottom);
 		this.m_oMainView.AddControl(this.m_oEditor);
 
+		console.log('sdkjs构建编辑器编辑区：---id_viewer_overlay 主体区canvas');
 		this.m_oOverlay = AscCommon.CreateControl("id_viewer_overlay");
 		this.m_oOverlay.Bounds.SetParams(0, 0, 1000, 1000, false, false, false, false, -1, -1);
 		this.m_oOverlay.Anchor = (g_anchor_left | g_anchor_top | g_anchor_right | g_anchor_bottom);
 		this.m_oMainView.AddControl(this.m_oOverlay);
 		// --------------------------------------------------------------------------
 
+		console.log('sdkjs构建编辑器编辑区：---id_target_cursor 文字光标区');
 		this.m_oDrawingDocument.TargetHtmlElement = document.getElementById('id_target_cursor');
 
 		this.checkNeedRules();
+		console.log('sdkjs绑定事件：');
 		this.initEvents();
 
 		this.m_oOverlayApi.m_oControl  = this.m_oOverlay;
@@ -445,6 +485,8 @@ function CEditorPage(api)
 	// events ---
 	this.initEvents = function()
 	{
+		debugger;
+		console.log('绑定事件initEvents')
 		this.arrayEventHandlers[0] = new AscCommon.button_eventHandlers("", "0px 0px", "0px -16px", "0px -32px", this.m_oPanelRight_buttonRulers, this.onButtonRulersClick);
 		this.arrayEventHandlers[1] = new AscCommon.button_eventHandlers("", "0px 0px", "0px -16px", "0px -32px", this.m_oPanelRight_buttonPrevPage, this.onPrevPage);
 		this.arrayEventHandlers[2] = new AscCommon.button_eventHandlers("", "0px -48px", "0px -64px", "0px -80px", this.m_oPanelRight_buttonNextPage, this.onNextPage);
@@ -719,9 +761,10 @@ function CEditorPage(api)
 
 		oWordControl.m_oVerRuler.OnMouseMove(0, oWordControl.m_oDrawingDocument.m_arrPages[_cur_page].drawingPage.top, e);
 	};
-
+	//检查是否显示标尺
 	this.checkNeedRules     = function()
 	{
+		console.log('检查是否显示标尺');
 		if (this.m_bIsRuler)
 		{
 			this.m_oLeftRuler.HtmlElement.style.display = 'block';
@@ -1274,9 +1317,11 @@ function CEditorPage(api)
 				.onButtonTabsDraw();
 		}
 	};
-
+	//绘制 m_oLeftRuler_buttonsTabs
 	this.onButtonTabsDraw = function()
 	{
+		// debugger;
+		console.log('绘制 m_oLeftRuler_buttonsTabs ')
 		var _ctx = this.m_oLeftRuler_buttonsTabs.HtmlElement.getContext('2d');
 		_ctx.setTransform(1, 0, 0, 1, 0, 0);
 
@@ -1740,9 +1785,10 @@ function CEditorPage(api)
 			this.m_oScrollVerApi.scrollToY(pos.Y + this.m_dScrollY);
 	};
 
-	// events ---
+	// events ---鼠标点下事件
 	this.onMouseDown = function(e, isTouch)
 	{
+		console.log('鼠标按下事件')
 		oThis.m_oApi.checkInterfaceElementBlur();
 		oThis.m_oApi.checkLastWork();
 
@@ -1881,6 +1927,7 @@ function CEditorPage(api)
 
 	this.onMouseMove  = function(e, isTouch)
 	{
+		// console.log('鼠标移动事件')
 		oThis.m_oApi.checkLastWork();
 
 		if (false === oThis.m_oApi.bInit_word_control || (AscCommon.isTouch && undefined === isTouch) || oThis.m_oApi.isLongAction())
@@ -2040,6 +2087,7 @@ function CEditorPage(api)
 
 	this.onMouseUp    = function(e, bIsWindow, isTouch)
 	{
+		console.log('鼠标松开事件')
 		oThis.m_oApi.checkLastWork();
 
 		//console.log("up: " + isTouch + ", " + AscCommon.isTouch);
@@ -2853,6 +2901,7 @@ function CEditorPage(api)
 
 	this.OnPaint = function()
 	{
+		// debugger;
 		var isNoPaint = this.m_oApi.isLongAction();
 		if (isNoPaint && this.m_oDrawingDocument && this.m_oDrawingDocument.isDisableEditBeforeCalculateLA)
 			isNoPaint = false;
@@ -2968,11 +3017,14 @@ function CEditorPage(api)
 				this.m_oDrawingDocument.CheckRecalculatePage(__w, __h, i);
 				if (null == drawPage.cachedImage)
 				{
+					
 					this.m_oDrawingDocument.StartRenderingPage(i);
+					console.log(`按页面渲染内容，当前第${i}页`,drawPage.cachedImage.image.toDataURL())
 				}
 
 				this.m_oDrawingDocument.m_arrPages[i].Draw(context, __x, __y, __w, __h, this.m_oApi);
 			}
+			console.log('文件渲染OnPaint',context.canvas.toDataURL('image/png'))
 		}
 
 		this.m_bIsFullRepaint = false;

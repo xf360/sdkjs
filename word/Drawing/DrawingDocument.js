@@ -2160,9 +2160,11 @@ function CDrawingDocument()
 		var color = this.GetTargetColor();
 		return "rgb(" + color.R + "," + color.G + "," + color.B + ")";
 	};
-
+	//当前光标位置
 	this.CheckTargetDraw = function (x, y)
 	{
+		// debugger;
+		console.log('更新光标位置')
 		var oldW = this.TargetHtmlElement.width_old;
 		var oldH = this.TargetHtmlElement.height_old;
 
@@ -4333,6 +4335,7 @@ function CDrawingDocument()
 			_drawingPage.UnLock(this.m_oCacheManager);
 	};
 
+	//按页码绘制内容
 	this.StartRenderingPage = function (pageIndex)
 	{
 		if (true === this.IsFreezePage(pageIndex))
@@ -4355,7 +4358,7 @@ function CDrawingDocument()
 		h = _check[1];
 
 		page.drawingPage.UnLock(this.m_oCacheManager);
-		page.drawingPage.cachedImage = this.m_oCacheManager.Lock(w, h, this);
+		page.drawingPage.cachedImage = this.m_oCacheManager.Lock(w, h, this);//将内容区清空
 
 		//var StartTime = new Date().getTime();
 
@@ -4370,6 +4373,8 @@ function CDrawingDocument()
 		if (this.m_oWordControl.m_oApi.isDarkMode)
 			g.darkModeOverride3();
 
+		//ceshi
+		window._shaohui_page=page;
 		if (null == this.m_oDocumentRenderer)
 			this.m_oLogicDocument.DrawPage(pageIndex, g);
 		else
@@ -4465,6 +4470,7 @@ function CDrawingDocument()
 		return {X: _x, Y: _y, Error: false};
 	};
 
+	//坐标转换
 	this.ConvertCoordsFromCursor2 = function (x, y, zoomVal, isRulers)
 	{
 		var _x = x;

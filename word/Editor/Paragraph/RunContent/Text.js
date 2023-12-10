@@ -348,6 +348,8 @@
 	};
 	CRunText.prototype.Draw = function(X, Y, Context, PDSE, oTextPr)
 	{
+		debugger;
+		console.log('text.js渲染Draw----')
 		if (Context.m_bIsTextDrawer === true)
 		{
 			Context.CheckAddNewPath(X, Y, this.Value);

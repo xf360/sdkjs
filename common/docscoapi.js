@@ -32,7 +32,7 @@
 
 "use strict";
 
-(function(window, undefined) {
+(function (window, undefined) {
   'use strict';
 
   var Asc = window['Asc'];
@@ -55,12 +55,12 @@
       this.onParticipantsChangedOrigin = options.onParticipantsChangedOrigin;
       this.onMessage = options.onMessage;
       this.onServerVersion = options.onServerVersion;
-      this.onCursor =  options.onCursor;
-      this.onMeta =  options.onMeta;
-      this.onSession =  options.onSession;
-      this.onExpiredToken =  options.onExpiredToken;
-	  this.onForceSave =  options.onForceSave;
-      this.onHasForgotten =  options.onHasForgotten;
+      this.onCursor = options.onCursor;
+      this.onMeta = options.onMeta;
+      this.onSession = options.onSession;
+      this.onExpiredToken = options.onExpiredToken;
+      this.onForceSave = options.onForceSave;
+      this.onHasForgotten = options.onHasForgotten;
       this.onLocksAcquired = options.onLocksAcquired;
       this.onLocksReleased = options.onLocksReleased;
       this.onLocksReleasedEnd = options.onLocksReleasedEnd; // ToDo переделать на массив release locks
@@ -83,100 +83,100 @@
     }
   }
 
-  CDocsCoApi.prototype.init = function(user, docid, documentCallbackUrl, token, editorType, documentFormatSave, docInfo) {
+  CDocsCoApi.prototype.init = function (user, docid, documentCallbackUrl, token, editorType, documentFormatSave, docInfo) {
     if (this._CoAuthoringApi && this._CoAuthoringApi.isRightURL()) {
       var t = this;
-      this._CoAuthoringApi.onAuthParticipantsChanged = function(e, id) {
+      this._CoAuthoringApi.onAuthParticipantsChanged = function (e, id) {
         t.callback_OnAuthParticipantsChanged(e, id);
       };
-      this._CoAuthoringApi.onParticipantsChanged = function(e) {
+      this._CoAuthoringApi.onParticipantsChanged = function (e) {
         t.callback_OnParticipantsChanged(e);
       };
-      this._CoAuthoringApi.onParticipantsChangedOrigin = function(e) {
+      this._CoAuthoringApi.onParticipantsChangedOrigin = function (e) {
         t.callback_OnParticipantsChangedOrigin(e);
       };
-      this._CoAuthoringApi.onMessage = function(e, clear) {
+      this._CoAuthoringApi.onMessage = function (e, clear) {
         t.callback_OnMessage(e, clear);
       };
-      this._CoAuthoringApi.onServerVersion = function(e) {
-      	t.callback_OnServerVersion(e);
-	  };
-      this._CoAuthoringApi.onCursor = function(e) {
+      this._CoAuthoringApi.onServerVersion = function (e) {
+        t.callback_OnServerVersion(e);
+      };
+      this._CoAuthoringApi.onCursor = function (e) {
         t.callback_OnCursor(e);
       };
-      this._CoAuthoringApi.onMeta = function(e) {
+      this._CoAuthoringApi.onMeta = function (e) {
         t.callback_OnMeta(e);
       };
-      this._CoAuthoringApi.onSession = function(e) {
+      this._CoAuthoringApi.onSession = function (e) {
         t.callback_OnSession(e);
       };
-      this._CoAuthoringApi.onExpiredToken = function(e) {
+      this._CoAuthoringApi.onExpiredToken = function (e) {
         t.callback_OnExpiredToken(e);
       };
-      this._CoAuthoringApi.onHasForgotten = function(e) {
+      this._CoAuthoringApi.onHasForgotten = function (e) {
         t.callback_OnHasForgotten(e);
       };
-	  this._CoAuthoringApi.onForceSave = function(e) {
+      this._CoAuthoringApi.onForceSave = function (e) {
         t.callback_OnForceSave(e);
       };
-      this._CoAuthoringApi.onLocksAcquired = function(e) {
+      this._CoAuthoringApi.onLocksAcquired = function (e) {
         t.callback_OnLocksAcquired(e);
       };
-      this._CoAuthoringApi.onLocksReleased = function(e, bChanges) {
+      this._CoAuthoringApi.onLocksReleased = function (e, bChanges) {
         t.callback_OnLocksReleased(e, bChanges);
       };
-      this._CoAuthoringApi.onLocksReleasedEnd = function() {
+      this._CoAuthoringApi.onLocksReleasedEnd = function () {
         t.callback_OnLocksReleasedEnd();
       };
-      this._CoAuthoringApi.onDisconnect = function(e, code) {
+      this._CoAuthoringApi.onDisconnect = function (e, code) {
         t.callback_OnDisconnect(e, code);
       };
-      this._CoAuthoringApi.onWarning = function(e) {
+      this._CoAuthoringApi.onWarning = function (e) {
         t.callback_OnWarning(e);
       };
-      this._CoAuthoringApi.onFirstLoadChangesEnd = function(openedAt) {
+      this._CoAuthoringApi.onFirstLoadChangesEnd = function (openedAt) {
         t.callback_OnFirstLoadChangesEnd(openedAt);
       };
-      this._CoAuthoringApi.onConnectionStateChanged = function(e) {
+      this._CoAuthoringApi.onConnectionStateChanged = function (e) {
         t.callback_OnConnectionStateChanged(e);
       };
-      this._CoAuthoringApi.onSetIndexUser = function(e) {
+      this._CoAuthoringApi.onSetIndexUser = function (e) {
         t.callback_OnSetIndexUser(e);
       };
-      this._CoAuthoringApi.onSpellCheckInit = function(e) {
+      this._CoAuthoringApi.onSpellCheckInit = function (e) {
         t.callback_OnSpellCheckInit(e);
       };
-      this._CoAuthoringApi.onSaveChanges = function(e, userId, bFirstLoad) {
+      this._CoAuthoringApi.onSaveChanges = function (e, userId, bFirstLoad) {
         t.callback_OnSaveChanges(e, userId, bFirstLoad);
       };
-      this._CoAuthoringApi.onChangesIndex = function(changesIndex) {
+      this._CoAuthoringApi.onChangesIndex = function (changesIndex) {
         t.callback_OnChangesIndex(changesIndex);
       };
       // Callback есть пользователей больше 1
-      this._CoAuthoringApi.onStartCoAuthoring = function(e, isWaitAuth) {
+      this._CoAuthoringApi.onStartCoAuthoring = function (e, isWaitAuth) {
         t.callback_OnStartCoAuthoring(e, isWaitAuth);
       };
-      this._CoAuthoringApi.onEndCoAuthoring = function(e) {
+      this._CoAuthoringApi.onEndCoAuthoring = function (e) {
         t.callback_OnEndCoAuthoring(e);
       };
-      this._CoAuthoringApi.onUnSaveLock = function() {
+      this._CoAuthoringApi.onUnSaveLock = function () {
         t.callback_OnUnSaveLock();
       };
-      this._CoAuthoringApi.onRecalcLocks = function(e) {
+      this._CoAuthoringApi.onRecalcLocks = function (e) {
         t.callback_OnRecalcLocks(e);
       };
-      this._CoAuthoringApi.onDocumentOpen = function(data) {
+      this._CoAuthoringApi.onDocumentOpen = function (data) {
         t.callback_OnDocumentOpen(data);
       };
-      this._CoAuthoringApi.onFirstConnect = function() {
+      this._CoAuthoringApi.onFirstConnect = function () {
         t.callback_OnFirstConnect();
       };
-      this._CoAuthoringApi.onLicense = function(res) {
+      this._CoAuthoringApi.onLicense = function (res) {
         t.callback_OnLicense(res);
       };
-      this._CoAuthoringApi.onLicenseChanged = function(res) {
+      this._CoAuthoringApi.onLicenseChanged = function (res) {
         t.callback_OnLicenseChanged(res);
-	  };
+      };
 
       this._CoAuthoringApi.init(user, docid, documentCallbackUrl, token, editorType, documentFormatSave, docInfo);
       this._onlineWork = true;
@@ -187,24 +187,24 @@
     }
   };
 
-  CDocsCoApi.prototype.getDocId = function() {
+  CDocsCoApi.prototype.getDocId = function () {
     if (this._CoAuthoringApi) {
       return this._CoAuthoringApi.getDocId()
     }
     return undefined;
   };
-  CDocsCoApi.prototype.setDocId = function(docId) {
+  CDocsCoApi.prototype.setDocId = function (docId) {
     if (this._CoAuthoringApi) {
       return this._CoAuthoringApi.setDocId(docId)
     }
   };
-  CDocsCoApi.prototype.setBinaryChanges = function(binaryChanges) {
+  CDocsCoApi.prototype.setBinaryChanges = function (binaryChanges) {
     if (this._CoAuthoringApi) {
       return this._CoAuthoringApi.binaryChanges = binaryChanges;
     }
   };
 
-  CDocsCoApi.prototype.auth = function(isViewer, opt_openCmd, opt_isIdle) {
+  CDocsCoApi.prototype.auth = function (isViewer, opt_openCmd, opt_isIdle) {
     if (this._CoAuthoringApi && this._onlineWork) {
       this._CoAuthoringApi.auth(isViewer, opt_openCmd, opt_isIdle);
     } else {
@@ -215,17 +215,17 @@
     }
   };
 
-  CDocsCoApi.prototype.set_url = function(url) {
+  CDocsCoApi.prototype.set_url = function (url) {
     if (this._CoAuthoringApi) {
       this._CoAuthoringApi.set_url(url);
     }
   };
 
-  CDocsCoApi.prototype.get_onlineWork = function() {
+  CDocsCoApi.prototype.get_onlineWork = function () {
     return this._onlineWork;
   };
 
-  CDocsCoApi.prototype.get_state = function() {
+  CDocsCoApi.prototype.get_state = function () {
     if (this._CoAuthoringApi) {
       return this._CoAuthoringApi.get_state();
     }
@@ -233,55 +233,55 @@
     return 0;
   };
 
-  CDocsCoApi.prototype.openDocument = function(data) {
+  CDocsCoApi.prototype.openDocument = function (data) {
     if (this._CoAuthoringApi && this._onlineWork) {
       this._CoAuthoringApi.openDocument(data);
     }
   };
 
-  CDocsCoApi.prototype.sendRawData = function(data) {
+  CDocsCoApi.prototype.sendRawData = function (data) {
     if (this._CoAuthoringApi && this._onlineWork) {
       this._CoAuthoringApi.sendRawData(data);
     }
   };
 
-  CDocsCoApi.prototype.getMessages = function() {
+  CDocsCoApi.prototype.getMessages = function () {
     if (this._CoAuthoringApi && this._onlineWork) {
       this._CoAuthoringApi.getMessages();
     }
   };
 
-  CDocsCoApi.prototype.sendMessage = function(message) {
+  CDocsCoApi.prototype.sendMessage = function (message) {
     if (this._CoAuthoringApi && this._onlineWork) {
       this._CoAuthoringApi.sendMessage(message);
     }
   };
 
-  CDocsCoApi.prototype.sendCursor = function(cursor) {
+  CDocsCoApi.prototype.sendCursor = function (cursor) {
     if (this._CoAuthoringApi && this._onlineWork) {
       this._CoAuthoringApi.sendCursor(cursor);
     }
   };
 
-  CDocsCoApi.prototype.sendClientLog = function(level, msg) {
+  CDocsCoApi.prototype.sendClientLog = function (level, msg) {
     if (this._CoAuthoringApi && this._onlineWork) {
       this._CoAuthoringApi.sendClientLog(level, msg);
     }
   };
 
-  CDocsCoApi.prototype.askLock = function(arrayBlockId, callback) {
+  CDocsCoApi.prototype.askLock = function (arrayBlockId, callback) {
     if (this._CoAuthoringApi && this._onlineWork) {
       this._CoAuthoringApi.askLock(arrayBlockId, callback);
     } else {
       var t = this;
-      window.setTimeout(function() {
+      window.setTimeout(function () {
         if (callback) {
           var lengthArray = (arrayBlockId) ? arrayBlockId.length : 0;
           if (0 < lengthArray) {
-            callback({"lock": arrayBlockId[0]});
+            callback({ "lock": arrayBlockId[0] });
             // Фиктивные вызовы
             for (var i = 0; i < lengthArray; ++i) {
-              t.callback_OnLocksAcquired({"state": 2, "block": arrayBlockId[i]});
+              t.callback_OnLocksAcquired({ "state": 2, "block": arrayBlockId[i] });
             }
           }
         }
@@ -289,32 +289,32 @@
     }
   };
 
-  CDocsCoApi.prototype.askSaveChanges = function(callback) {
+  CDocsCoApi.prototype.askSaveChanges = function (callback) {
     if (this._CoAuthoringApi && this._onlineWork) {
       this._CoAuthoringApi.askSaveChanges(callback);
     } else {
-      window.setTimeout(function() {
+      window.setTimeout(function () {
         if (callback) {
           // Фиктивные вызовы
-          callback({"saveLock": false});
+          callback({ "saveLock": false });
         }
       }, 100);
     }
   };
 
-  CDocsCoApi.prototype.unSaveLock = function() {
+  CDocsCoApi.prototype.unSaveLock = function () {
     if (this._CoAuthoringApi && this._onlineWork) {
       this._CoAuthoringApi.unSaveLock();
     } else {
       var t = this;
-      window.setTimeout(function() {
+      window.setTimeout(function () {
         // Фиктивные вызовы
         t.callback_OnUnSaveLock();
       }, 100);
     }
   };
 
-  CDocsCoApi.prototype.saveChanges = function(arrayChanges, deleteIndex, excelAdditionalInfo, canUnlockDocument, canReleaseLocks) {
+  CDocsCoApi.prototype.saveChanges = function (arrayChanges, deleteIndex, excelAdditionalInfo, canUnlockDocument, canReleaseLocks) {
     if (this._CoAuthoringApi && this._onlineWork) {
       this._CoAuthoringApi.canUnlockDocument = canUnlockDocument;
       this._CoAuthoringApi.canReleaseLocks = canReleaseLocks;
@@ -322,7 +322,7 @@
     }
   };
 
-  CDocsCoApi.prototype.unLockDocument = function(isSave, canUnlockDocument, deleteIndex, canReleaseLocks) {
+  CDocsCoApi.prototype.unLockDocument = function (isSave, canUnlockDocument, deleteIndex, canReleaseLocks) {
     if (this._CoAuthoringApi && this._onlineWork) {
       this._CoAuthoringApi.canUnlockDocument = canUnlockDocument;
       this._CoAuthoringApi.canReleaseLocks = canReleaseLocks;
@@ -330,170 +330,170 @@
     }
   };
 
-  CDocsCoApi.prototype.getUsers = function() {
+  CDocsCoApi.prototype.getUsers = function () {
     if (this._CoAuthoringApi && this._onlineWork) {
       this._CoAuthoringApi.getUsers();
     }
   };
 
-  CDocsCoApi.prototype.getUserConnectionId = function() {
+  CDocsCoApi.prototype.getUserConnectionId = function () {
     if (this._CoAuthoringApi && this._onlineWork) {
       return this._CoAuthoringApi.getUserConnectionId();
     }
     return null;
   };
 
-  CDocsCoApi.prototype.getParticipantName = function(userId) {
+  CDocsCoApi.prototype.getParticipantName = function (userId) {
     if (this._CoAuthoringApi && this._onlineWork) {
       return this._CoAuthoringApi.getParticipantName(userId);
     }
     return "";
   };
-  
-  CDocsCoApi.prototype.get_serverChangesSize = function() {
+
+  CDocsCoApi.prototype.get_serverChangesSize = function () {
     if (this._CoAuthoringApi && this._onlineWork) {
       return this._CoAuthoringApi.get_serverChangesSize();
     }
     return 0;
   };
 
-  CDocsCoApi.prototype.get_indexUser = function() {
+  CDocsCoApi.prototype.get_indexUser = function () {
     if (this._CoAuthoringApi && this._onlineWork) {
       return this._CoAuthoringApi.get_indexUser();
     }
     return null;
   };
 
-  CDocsCoApi.prototype.get_isAuth = function() {
+  CDocsCoApi.prototype.get_isAuth = function () {
     if (this._CoAuthoringApi && this._onlineWork) {
       return this._CoAuthoringApi.get_isAuth();
     }
     return null;
   };
-  
-  CDocsCoApi.prototype.get_jwt = function() {
+
+  CDocsCoApi.prototype.get_jwt = function () {
     if (this._CoAuthoringApi && this._onlineWork) {
       return this._CoAuthoringApi.get_jwt();
     }
     return null;
   };
 
-  CDocsCoApi.prototype.releaseLocks = function(blockId) {
+  CDocsCoApi.prototype.releaseLocks = function (blockId) {
     if (this._CoAuthoringApi && this._onlineWork) {
       this._CoAuthoringApi.releaseLocks(blockId);
     }
   };
 
-  CDocsCoApi.prototype.disconnect = function(opt_code, opt_reason) {
+  CDocsCoApi.prototype.disconnect = function (opt_code, opt_reason) {
     if (this._CoAuthoringApi && this._onlineWork) {
       this._CoAuthoringApi.disconnect(opt_code, opt_reason);
     }
   };
 
-  CDocsCoApi.prototype.extendSession = function(idleTime) {
+  CDocsCoApi.prototype.extendSession = function (idleTime) {
     if (this._CoAuthoringApi && this._onlineWork) {
       this._CoAuthoringApi.extendSession(idleTime);
     }
   };
 
-  CDocsCoApi.prototype.versionHistory = function(data) {
+  CDocsCoApi.prototype.versionHistory = function (data) {
     if (this._CoAuthoringApi && this._onlineWork) {
       this._CoAuthoringApi.versionHistory(data);
     }
   };
 
-	CDocsCoApi.prototype.forceSave = function() {
-		if (this._CoAuthoringApi && this._onlineWork) {
-			return this._CoAuthoringApi.forceSave();
-		}
-		return false;
-	};
-	CDocsCoApi.prototype.callPRC = function(data, timeout, callback) {
-		if (this._CoAuthoringApi && this._onlineWork) {
-			return this._CoAuthoringApi.callPRC(data, timeout, callback);
-		}
-		return false;
-	};
+  CDocsCoApi.prototype.forceSave = function () {
+    if (this._CoAuthoringApi && this._onlineWork) {
+      return this._CoAuthoringApi.forceSave();
+    }
+    return false;
+  };
+  CDocsCoApi.prototype.callPRC = function (data, timeout, callback) {
+    if (this._CoAuthoringApi && this._onlineWork) {
+      return this._CoAuthoringApi.callPRC(data, timeout, callback);
+    }
+    return false;
+  };
 
-  CDocsCoApi.prototype.callback_OnAuthParticipantsChanged = function(e, id) {
+  CDocsCoApi.prototype.callback_OnAuthParticipantsChanged = function (e, id) {
     if (this.onAuthParticipantsChanged) {
       this.onAuthParticipantsChanged(e, id);
     }
   };
 
-  CDocsCoApi.prototype.callback_OnParticipantsChanged = function(e) {
+  CDocsCoApi.prototype.callback_OnParticipantsChanged = function (e) {
     if (this.onParticipantsChanged) {
       this.onParticipantsChanged(e);
     }
   };
 
-  CDocsCoApi.prototype.callback_OnParticipantsChangedOrigin = function(e) {
+  CDocsCoApi.prototype.callback_OnParticipantsChangedOrigin = function (e) {
     if (this.onParticipantsChangedOrigin) {
       this.onParticipantsChangedOrigin(e);
     }
   };
 
-  CDocsCoApi.prototype.callback_OnMessage = function(e, clear) {
+  CDocsCoApi.prototype.callback_OnMessage = function (e, clear) {
     if (this.onMessage) {
       this.onMessage(e, clear);
     }
   };
 
-  CDocsCoApi.prototype.callback_OnServerVersion = function(e) {
-  	if (this.onServerVersion) {
+  CDocsCoApi.prototype.callback_OnServerVersion = function (e) {
+    if (this.onServerVersion) {
       this.onServerVersion(e);
-	}
+    }
   };
 
-  CDocsCoApi.prototype.callback_OnCursor = function(e) {
+  CDocsCoApi.prototype.callback_OnCursor = function (e) {
     if (this.onCursor) {
       this.onCursor(e);
     }
   };
 
-  CDocsCoApi.prototype.callback_OnMeta = function(e) {
+  CDocsCoApi.prototype.callback_OnMeta = function (e) {
     if (this.onMeta) {
       this.onMeta(e);
     }
   };
 
-  CDocsCoApi.prototype.callback_OnSession = function(e) {
+  CDocsCoApi.prototype.callback_OnSession = function (e) {
     if (this.onSession) {
       this.onSession(e);
     }
   };
 
-  CDocsCoApi.prototype.callback_OnExpiredToken = function(e) {
+  CDocsCoApi.prototype.callback_OnExpiredToken = function (e) {
     if (this.onExpiredToken) {
       this.onExpiredToken(e);
     }
   };
-  
-  CDocsCoApi.prototype.callback_OnForceSave = function(e) {
+
+  CDocsCoApi.prototype.callback_OnForceSave = function (e) {
     if (this.onForceSave) {
       this.onForceSave(e);
     }
   };
 
-  CDocsCoApi.prototype.callback_OnHasForgotten = function(e) {
+  CDocsCoApi.prototype.callback_OnHasForgotten = function (e) {
     if (this.onHasForgotten) {
       this.onHasForgotten(e);
     }
   };
 
-  CDocsCoApi.prototype.callback_OnLocksAcquired = function(e) {
+  CDocsCoApi.prototype.callback_OnLocksAcquired = function (e) {
     if (this.onLocksAcquired) {
       this.onLocksAcquired(e);
     }
   };
 
-  CDocsCoApi.prototype.callback_OnLocksReleased = function(e, bChanges) {
+  CDocsCoApi.prototype.callback_OnLocksReleased = function (e, bChanges) {
     if (this.onLocksReleased) {
       this.onLocksReleased(e, bChanges);
     }
   };
 
-  CDocsCoApi.prototype.callback_OnLocksReleasedEnd = function() {
+  CDocsCoApi.prototype.callback_OnLocksReleasedEnd = function () {
     if (this.onLocksReleasedEnd) {
       this.onLocksReleasedEnd();
     }
@@ -504,89 +504,89 @@
    * @param {jQuery} e  event об отсоединении с причиной
    * @param {code: AscCommon.c_oCloseCode.drop} code
    */
-  CDocsCoApi.prototype.callback_OnDisconnect = function(e, code) {
+  CDocsCoApi.prototype.callback_OnDisconnect = function (e, code) {
     if (this.onDisconnect) {
       this.onDisconnect(e, code);
     }
   };
 
-  CDocsCoApi.prototype.callback_OnWarning = function(e) {
+  CDocsCoApi.prototype.callback_OnWarning = function (e) {
     if (this.onWarning) {
       this.onWarning(e);
     }
   };
 
-  CDocsCoApi.prototype.callback_OnFirstLoadChangesEnd = function(openedAt) {
+  CDocsCoApi.prototype.callback_OnFirstLoadChangesEnd = function (openedAt) {
     if (this.onFirstLoadChangesEnd) {
       this.onFirstLoadChangesEnd(openedAt);
     }
   };
 
-  CDocsCoApi.prototype.callback_OnConnectionStateChanged = function(e) {
+  CDocsCoApi.prototype.callback_OnConnectionStateChanged = function (e) {
     if (this.onConnectionStateChanged) {
       this.onConnectionStateChanged(e);
     }
   };
 
-  CDocsCoApi.prototype.callback_OnSetIndexUser = function(e) {
+  CDocsCoApi.prototype.callback_OnSetIndexUser = function (e) {
     if (this.onSetIndexUser) {
       this.onSetIndexUser(e);
     }
   };
-  CDocsCoApi.prototype.callback_OnSpellCheckInit = function(e) {
+  CDocsCoApi.prototype.callback_OnSpellCheckInit = function (e) {
     if (this.onSpellCheckInit) {
       this.onSpellCheckInit(e);
     }
   };
 
-  CDocsCoApi.prototype.callback_OnSaveChanges = function(e, userId, bFirstLoad) {
+  CDocsCoApi.prototype.callback_OnSaveChanges = function (e, userId, bFirstLoad) {
     if (this.onSaveChanges) {
       this.onSaveChanges(e, userId, bFirstLoad);
     }
   };
-  CDocsCoApi.prototype.callback_OnChangesIndex = function(changesIndex) {
+  CDocsCoApi.prototype.callback_OnChangesIndex = function (changesIndex) {
     if (this.onChangesIndex) {
       this.onChangesIndex(changesIndex);
     }
   };
-  CDocsCoApi.prototype.callback_OnStartCoAuthoring = function(e, isWaitAuth) {
+  CDocsCoApi.prototype.callback_OnStartCoAuthoring = function (e, isWaitAuth) {
     if (this.onStartCoAuthoring) {
       this.onStartCoAuthoring(e, isWaitAuth);
     }
   };
-  CDocsCoApi.prototype.callback_OnEndCoAuthoring = function(e) {
+  CDocsCoApi.prototype.callback_OnEndCoAuthoring = function (e) {
     if (this.onEndCoAuthoring) {
       this.onEndCoAuthoring(e);
     }
   };
 
-  CDocsCoApi.prototype.callback_OnUnSaveLock = function() {
+  CDocsCoApi.prototype.callback_OnUnSaveLock = function () {
     if (this.onUnSaveLock) {
       this.onUnSaveLock();
     }
   };
 
-  CDocsCoApi.prototype.callback_OnRecalcLocks = function(e) {
+  CDocsCoApi.prototype.callback_OnRecalcLocks = function (e) {
     if (this.onRecalcLocks) {
       this.onRecalcLocks(e);
     }
   };
-  CDocsCoApi.prototype.callback_OnDocumentOpen = function(e) {
+  CDocsCoApi.prototype.callback_OnDocumentOpen = function (e) {
     if (this.onDocumentOpen) {
       this.onDocumentOpen(e);
     }
   };
-  CDocsCoApi.prototype.callback_OnFirstConnect = function() {
+  CDocsCoApi.prototype.callback_OnFirstConnect = function () {
     if (this.onFirstConnect) {
       this.onFirstConnect();
     }
   };
-  CDocsCoApi.prototype.callback_OnLicense = function(res) {
+  CDocsCoApi.prototype.callback_OnLicense = function (res) {
     if (this.onLicense) {
       this.onLicense(res);
     }
   };
-  CDocsCoApi.prototype.callback_OnLicenseChanged = function(res) {
+  CDocsCoApi.prototype.callback_OnLicenseChanged = function (res) {
     if (this.onLicenseChanged) {
       this.onLicenseChanged(res);
     }
@@ -606,10 +606,10 @@
       this.onServerVersion = options.onServerVersion;
       this.onCursor = options.onCursor;
       this.onMeta = options.onMeta;
-      this.onSession =  options.onSession;
-      this.onExpiredToken =  options.onExpiredToken;
-	  this.onForceSave =  options.onForceSave;
-      this.onHasForgotten =  options.onHasForgotten;
+      this.onSession = options.onSession;
+      this.onExpiredToken = options.onExpiredToken;
+      this.onForceSave = options.onForceSave;
+      this.onHasForgotten = options.onHasForgotten;
       this.onLocksAcquired = options.onLocksAcquired;
       this.onLocksReleased = options.onLocksReleased;
       this.onLocksReleasedEnd = options.onLocksReleasedEnd; // ToDo переделать на массив release locks
@@ -651,9 +651,9 @@
     this.unSaveLockCallbackErrorTimeOutId = null;
     this._id = null;
     this._sessionTimeConnect = null;
-	this._allChangesSaved = null;
-	this._lastForceSaveButtonTime = null;
-	this._lastForceSaveTimeoutTime = null;
+    this._allChangesSaved = null;
+    this._lastForceSaveButtonTime = null;
+    this._lastForceSaveTimeoutTime = null;
     this._indexUser = -1;
     // Если пользователей больше 1, то совместно редактируем
     this.isCoAuthoring = false;
@@ -674,7 +674,7 @@
     this.arrayChanges = null;
     // Время последнего сохранения (для разрыва соединения)
     this.lastOtherSaveTime = -1;
-	this.lastOwnSaveTime = -1;
+    this.lastOwnSaveTime = -1;
     // Локальный индекс изменений
     this.changesIndex = 0;
     //server changes index
@@ -723,58 +723,58 @@
     this._authOtherChanges = [];
   }
 
-  DocsCoApi.prototype.isRightURL = function() {
+  DocsCoApi.prototype.isRightURL = function () {
     return ("" != this._url);
   };
 
-  DocsCoApi.prototype.set_url = function(url) {
+  DocsCoApi.prototype.set_url = function (url) {
     this._url = url;
   };
 
-  DocsCoApi.prototype.get_state = function() {
+  DocsCoApi.prototype.get_state = function () {
     return this._state;
   };
 
-	DocsCoApi.prototype.check_state = function () {
-		return ConnectionState.Authorized === this._state || ConnectionState.SaveChanges === this._state ||
-			ConnectionState.AskSaveChanges === this._state;
-	};
+  DocsCoApi.prototype.check_state = function () {
+    return ConnectionState.Authorized === this._state || ConnectionState.SaveChanges === this._state ||
+      ConnectionState.AskSaveChanges === this._state;
+  };
 
-  DocsCoApi.prototype.get_indexUser = function() {
+  DocsCoApi.prototype.get_indexUser = function () {
     return this._indexUser;
   };
 
-  DocsCoApi.prototype.get_serverChangesSize = function() {
+  DocsCoApi.prototype.get_serverChangesSize = function () {
     return this._serverChangesSize;
   };
 
-  DocsCoApi.prototype.get_isAuth = function() {
+  DocsCoApi.prototype.get_isAuth = function () {
     return this._isAuth;
   };
 
-  DocsCoApi.prototype.get_jwt = function() {
+  DocsCoApi.prototype.get_jwt = function () {
     return this.jwtSession || this.jwtOpen;
   };
 
-  DocsCoApi.prototype.getSessionId = function() {
+  DocsCoApi.prototype.getSessionId = function () {
     return this._id;
   };
 
-  DocsCoApi.prototype.getUserConnectionId = function() {
+  DocsCoApi.prototype.getUserConnectionId = function () {
     return this._userId;
   };
 
-  DocsCoApi.prototype.getParticipantName = function(userId) {
-  	if (this._participants[userId])
+  DocsCoApi.prototype.getParticipantName = function (userId) {
+    if (this._participants[userId])
       return this._participants[userId].asc_getUserName();
     return "";
   };
 
-  DocsCoApi.prototype.getLocks = function() {
+  DocsCoApi.prototype.getLocks = function () {
     return this._locks;
   };
 
-  DocsCoApi.prototype._sendBufferedLocks = function() {
+  DocsCoApi.prototype._sendBufferedLocks = function () {
     var elem;
     for (var i = 0, length = this._lockBuffer.length; i < length; ++i) {
       elem = this._lockBuffer[i];
@@ -783,7 +783,7 @@
     this._lockBuffer = [];
   };
 
-  DocsCoApi.prototype.askLock = function(arrayBlockId, callback) {
+  DocsCoApi.prototype.askLock = function (arrayBlockId, callback) {
     if (ConnectionState.SaveChanges === this._state || ConnectionState.AskSaveChanges === this._state) {
       // Мы в режиме сохранения. Lock-и запросим после окончания.
       this._lockBuffer.push(new LockBufferElement(arrayBlockId, callback));
@@ -815,32 +815,32 @@
         return;
       }
       //Ask
-      this._locks[idLockInArray] = {'state': 1};//1-asked for block
+      this._locks[idLockInArray] = { 'state': 1 };//1-asked for block
       if (callback) {
         this._lockCallbacks[idLockInArray] = callback;
 
         //Set reconnectTimeout
-        this._lockCallbacksErrorTimerId[idLockInArray] = window.setTimeout(function() {
+        this._lockCallbacksErrorTimerId[idLockInArray] = window.setTimeout(function () {
           if (t._lockCallbacks.hasOwnProperty(idLockInArray)) {
             //Not signaled already
-            t._lockCallbacks[idLockInArray]({error: 'Timed out'});
+            t._lockCallbacks[idLockInArray]({ error: 'Timed out' });
             delete t._lockCallbacks[idLockInArray];
             delete t._lockCallbacksErrorTimerId[idLockInArray];
           }
         }, this.errorTimeOut);
       }
-      this._send({"type": 'getLock', 'block': arrayBlockId});
+      this._send({ "type": 'getLock', 'block': arrayBlockId });
     } else {
       // Вернем ошибку, т.к. залочены элементы
-      window.setTimeout(function() {
+      window.setTimeout(function () {
         if (callback) {
-          callback({error: idLockInArray + '-lock'});
+          callback({ error: idLockInArray + '-lock' });
         }
       }, 100);
     }
   };
 
-  DocsCoApi.prototype.askSaveChanges = function(callback) {
+  DocsCoApi.prototype.askSaveChanges = function (callback) {
     if (this._saveCallback[this._saveCallback.length - 1]) {
       // Мы еще не отработали старый callback и ждем ответа
       return;
@@ -853,10 +853,10 @@
 
     // Проверим состояние, если мы не подсоединились, то сразу отправим ошибку
     if (ConnectionState.Authorized !== this._state) {
-      this.saveLockCallbackErrorTimeOutId = window.setTimeout(function() {
+      this.saveLockCallbackErrorTimeOutId = window.setTimeout(function () {
         if (callback) {
           // Фиктивные вызовы
-          callback({error: "No connection"});
+          callback({ error: "No connection" });
         }
       }, 100);
       return;
@@ -867,13 +867,13 @@
       this._saveCallback[indexCallback] = callback;
 
       //Set reconnectTimeout
-      this.saveLockCallbackErrorTimeOutId = window.setTimeout(function() {
+      this.saveLockCallbackErrorTimeOutId = window.setTimeout(function () {
         t.saveLockCallbackErrorTimeOutId = null;
         var oTmpCallback = t._saveCallback[indexCallback];
         if (oTmpCallback) {
           t._saveCallback[indexCallback] = null;
           //Not signaled already
-          oTmpCallback({error: "Timed out"});
+          oTmpCallback({ error: "Timed out" });
           t._state = ConnectionState.Authorized;
           // Делаем отложенные lock-и
           t._sendBufferedLocks();
@@ -881,31 +881,31 @@
       }, this.errorTimeOut);
     }
     this._state = ConnectionState.AskSaveChanges;
-    this._send({"type": "isSaveLock", "syncChangesIndex": this.syncChangesIndex});
+    this._send({ "type": "isSaveLock", "syncChangesIndex": this.syncChangesIndex });
   };
 
-  DocsCoApi.prototype.unSaveLock = function() {
+  DocsCoApi.prototype.unSaveLock = function () {
     // ToDo при разрыве соединения нужно перестать делать unSaveLock!
     var t = this;
-    this.unSaveLockCallbackErrorTimeOutId = window.setTimeout(function() {
+    this.unSaveLockCallbackErrorTimeOutId = window.setTimeout(function () {
       t.unSaveLockCallbackErrorTimeOutId = null;
       t.unSaveLock();
     }, this.errorTimeOut);
-    this._send({"type": "unSaveLock"});
+    this._send({ "type": "unSaveLock" });
   };
 
-  DocsCoApi.prototype.releaseLocks = function(blockId) {
+  DocsCoApi.prototype.releaseLocks = function (blockId) {
     if (this._locks[blockId] && 2 === this._locks[blockId].state /*lock is ours*/) {
       //Ask
-      this._locks[blockId] = {"state": 0};//0-released
+      this._locks[blockId] = { "state": 0 };//0-released
     }
   };
 
-  DocsCoApi.prototype._reSaveChanges = function(reSaveType) {
+  DocsCoApi.prototype._reSaveChanges = function (reSaveType) {
     this.saveChanges(this.arrayChanges, this.currentIndex, undefined, undefined, reSaveType);
   };
 
-  DocsCoApi.prototype.saveChanges = function(arrayChanges, currentIndex, deleteIndex, excelAdditionalInfo, reSave) {
+  DocsCoApi.prototype.saveChanges = function (arrayChanges, currentIndex, deleteIndex, excelAdditionalInfo, reSave) {
     if (null === currentIndex) {
       this.deleteIndex = deleteIndex;
       if (null != this.deleteIndex && -1 !== this.deleteIndex) {
@@ -934,7 +934,7 @@
 
     //Set errorTimeout
     var t = this;
-    this.saveCallbackErrorTimeOutId = window.setTimeout(function() {
+    this.saveCallbackErrorTimeOutId = window.setTimeout(function () {
       t.saveCallbackErrorTimeOutId = null;
       t._reSaveChanges(1);
     }, this.errorTimeOutSave);
@@ -945,72 +945,76 @@
       this._serverChangesSize += curBytes;
     }
     let _changes = this.binaryChanges ? arrayChanges.slice(startIndex, endIndex) : JSON.stringify(arrayChanges.slice(startIndex, endIndex));
-    this._send({'type': 'saveChanges', 'changes': _changes,
+    this._send({
+      'type': 'saveChanges', 'changes': _changes,
       'startSaveChanges': (startIndex === 0), 'endSaveChanges': (endIndex === arrayChanges.length),
       'isCoAuthoring': this.isCoAuthoring, 'isExcel': this._isExcel, 'deleteIndex': this.deleteIndex,
       'excelAdditionalInfo': this.excelAdditionalInfo ? JSON.stringify(this.excelAdditionalInfo) : null,
-        'unlock': this.canUnlockDocument, 'releaseLocks': this.canReleaseLocks, 'reSave': reSave});
+      'unlock': this.canUnlockDocument, 'releaseLocks': this.canReleaseLocks, 'reSave': reSave
+    });
   };
 
-  DocsCoApi.prototype.unLockDocument = function(isSave, deleteIndex) {
+  DocsCoApi.prototype.unLockDocument = function (isSave, deleteIndex) {
     this.deleteIndex = deleteIndex;
     if (null != this.deleteIndex && -1 !== this.deleteIndex) {
       this.deleteIndex += this.changesIndex;
     }
-    this._send({'type': 'unLockDocument', 'isSave': isSave, 'unlock': this.canUnlockDocument,
-      'deleteIndex': this.deleteIndex, 'releaseLocks': this.canReleaseLocks});
+    this._send({
+      'type': 'unLockDocument', 'isSave': isSave, 'unlock': this.canUnlockDocument,
+      'deleteIndex': this.deleteIndex, 'releaseLocks': this.canReleaseLocks
+    });
   };
 
-  DocsCoApi.prototype.getUsers = function() {
+  DocsCoApi.prototype.getUsers = function () {
     // Специально для возможности получения после прохождения авторизации (Стоит переделать)
     if (this.onAuthParticipantsChanged) {
       this.onAuthParticipantsChanged(this._participants, this._userId);
     }
   };
 
-  DocsCoApi.prototype.disconnect = function(opt_code, opt_reason) {
+  DocsCoApi.prototype.disconnect = function (opt_code, opt_reason) {
     // Отключаемся сами
     this.isCloseCoAuthoring = true;
     if (opt_code) {
       this.onDisconnect(opt_reason, opt_code);
       this.socketio.disconnect();
     } else {
-      this._send({"type": "close"});
+      this._send({ "type": "close" });
       this._state = ConnectionState.ClosedCoAuth;
     }
   };
 
-  DocsCoApi.prototype.extendSession = function(idleTime) {
-    this._send({'type': 'extendSession', 'idletime': idleTime});
+  DocsCoApi.prototype.extendSession = function (idleTime) {
+    this._send({ 'type': 'extendSession', 'idletime': idleTime });
   };
 
-  DocsCoApi.prototype.versionHistory = function(data) {
-    this._send({'type': 'versionHistory', 'cmd': data});
+  DocsCoApi.prototype.versionHistory = function (data) {
+    this._send({ 'type': 'versionHistory', 'cmd': data });
   };
 
-	DocsCoApi.prototype.forceSave = function() {
-        var res = false;
-		var newForceSaveButtonTime = Math.max(this.lastOtherSaveTime, this.lastOwnSaveTime);
-		if (this._lastForceSaveButtonTime < newForceSaveButtonTime) {
-			this._lastForceSaveButtonTime = newForceSaveButtonTime;
-			this._send({'type': 'forceSaveStart'});
-            res = true;
-		}
-		return res;
-	};
-  DocsCoApi.prototype.callPRC = function(data, timeout, callback) {
+  DocsCoApi.prototype.forceSave = function () {
+    var res = false;
+    var newForceSaveButtonTime = Math.max(this.lastOtherSaveTime, this.lastOwnSaveTime);
+    if (this._lastForceSaveButtonTime < newForceSaveButtonTime) {
+      this._lastForceSaveButtonTime = newForceSaveButtonTime;
+      this._send({ 'type': 'forceSaveStart' });
+      res = true;
+    }
+    return res;
+  };
+  DocsCoApi.prototype.callPRC = function (data, timeout, callback) {
     var t = this;
     var responseKey = ++this._countCalls;
     this._waitingForResponse[responseKey] = callback;
     if (timeout > 0) {
-      setTimeout(function() {
+      setTimeout(function () {
         t._onPRC(responseKey, true, undefined);
       }, timeout)
     }
-    this._send({'type': 'rpc', 'responseKey': responseKey, 'data': data});
+    this._send({ 'type': 'rpc', 'responseKey': responseKey, 'data': data });
     return true;
   };
-  DocsCoApi.prototype._onPRC = function(responseKey, isTimeout, response) {
+  DocsCoApi.prototype._onPRC = function (responseKey, isTimeout, response) {
     var callback = this._waitingForResponse[responseKey];
     delete this._waitingForResponse[responseKey];
     if (callback) {
@@ -1018,32 +1022,32 @@
     }
   };
 
-  DocsCoApi.prototype.openDocument = function(data) {
-    this._send({"type": "openDocument", "message": data});
+  DocsCoApi.prototype.openDocument = function (data) {
+    this._send({ "type": "openDocument", "message": data });
   };
 
-  DocsCoApi.prototype.sendRawData = function(data) {
+  DocsCoApi.prototype.sendRawData = function (data) {
     this._sendRaw(data);
   };
 
-  DocsCoApi.prototype.getMessages = function() {
-    this._send({"type": "getMessages"});
+  DocsCoApi.prototype.getMessages = function () {
+    this._send({ "type": "getMessages" });
   };
 
-  DocsCoApi.prototype.sendMessage = function(message) {
+  DocsCoApi.prototype.sendMessage = function (message) {
     if (typeof message === 'string') {
-      this._send({"type": "message", "message": message});
+      this._send({ "type": "message", "message": message });
     }
   };
 
-  DocsCoApi.prototype.sendCursor = function(cursor) {
+  DocsCoApi.prototype.sendCursor = function (cursor) {
     if (typeof cursor === 'string') {
-      this._send({"type": "cursor", "cursor": cursor});
+      this._send({ "type": "cursor", "cursor": cursor });
     }
   };
 
-  DocsCoApi.prototype.sendClientLog = function(level, msg) {
-    this._send({'type': 'clientLog', 'level': level, 'msg': msg});
+  DocsCoApi.prototype.sendClientLog = function (level, msg) {
+    this._send({ 'type': 'clientLog', 'level': level, 'msg': msg });
   };
 
   DocsCoApi.prototype._applyPrebuffered = function () {
@@ -1052,14 +1056,14 @@
     }
     this._msgInputBuffer = [];
   };
-  DocsCoApi.prototype._sendPrebuffered = function() {
+  DocsCoApi.prototype._sendPrebuffered = function () {
     for (var i = 0; i < this._msgBuffer.length; i++) {
       this._sendRaw(this._msgBuffer[i]);
     }
     this._msgBuffer = [];
   };
 
-  DocsCoApi.prototype._send = function(data, useEncryption) {
+  DocsCoApi.prototype._send = function (data, useEncryption) {
     if (!useEncryption && data && data["type"] == "saveChanges" && AscCommon.EncryptionWorker && AscCommon.EncryptionWorker.isInit())
       return AscCommon.EncryptionWorker.sendChanges(this, data, AscCommon.EncryptionMessageType.Encrypt);
 
@@ -1072,7 +1076,7 @@
     }
   };
 
-  DocsCoApi.prototype._sendRaw = function(data) {
+  DocsCoApi.prototype._sendRaw = function (data) {
     if (data !== null && typeof data === "string") {
       if (this._state > 0) {
         this.socketio.emit("message", data);
@@ -1082,49 +1086,49 @@
     }
   };
 
-  DocsCoApi.prototype._onMessages = function(data, clear) {
+  DocsCoApi.prototype._onMessages = function (data, clear) {
     if (this.check_state() && data["messages"] && this.onMessage) {
       this.onMessage(data["messages"], clear);
     }
   };
 
   DocsCoApi.prototype._onServerVersion = function (data) {
-  	if (this.onServerVersion) {
-		this.onServerVersion(data['buildVersion'], data['buildNumber']);
-	}
+    if (this.onServerVersion) {
+      this.onServerVersion(data['buildVersion'], data['buildNumber']);
+    }
   };
 
-  DocsCoApi.prototype._onCursor = function(data) {
+  DocsCoApi.prototype._onCursor = function (data) {
     if (this.check_state() && data["messages"] && this.onCursor) {
       this.onCursor(data["messages"]);
     }
   };
 
-  DocsCoApi.prototype._onMeta = function(data) {
+  DocsCoApi.prototype._onMeta = function (data) {
     if (data["messages"] && this.onMeta) {
       this.onMeta(data["messages"]);
     }
   };
 
-  DocsCoApi.prototype._onSession = function(data) {
+  DocsCoApi.prototype._onSession = function (data) {
     if (this.check_state() && data["messages"] && this.onSession) {
       this.onSession(data["messages"]);
     }
   };
 
-  DocsCoApi.prototype._onExpiredToken = function(data) {
+  DocsCoApi.prototype._onExpiredToken = function (data) {
     if (this.onExpiredToken) {
       this.onExpiredToken(data);
     }
   };
 
-  DocsCoApi.prototype._onHasForgotten = function(data) {
+  DocsCoApi.prototype._onHasForgotten = function (data) {
     if (this.onHasForgotten) {
       this.onHasForgotten();
     }
   };
 
-  DocsCoApi.prototype._onRefreshToken = function(jwt) {
+  DocsCoApi.prototype._onRefreshToken = function (jwt) {
     this.jwtOpen = undefined;
     if (this.socketio) {
       if (this.socketio["auth"]) {
@@ -1147,36 +1151,36 @@
     }
   };
 
-	DocsCoApi.prototype._onForceSaveStart = function(data) {
-	    var code = data['code'];
-		if (code === c_oAscServerCommandErrors.NoError) {
-			this._lastForceSaveButtonTime = data['time'];
-            this.onForceSave({type: c_oAscForceSaveTypes.Button, start: true});
-        } else if (code === c_oAscServerCommandErrors.NotModified) {
-            this.onForceSave({type: c_oAscForceSaveTypes.Button, refuse: true});
-		} else {
-			this.onWarning(Asc.c_oAscError.ID.Unknown);
-		}
-	};
-	DocsCoApi.prototype._onForceSave = function(data) {
-        var type = data['type'];
-		if (c_oAscForceSaveTypes.Button === type) {
-			if (this._lastForceSaveButtonTime == data['time']) {
-				this.onForceSave({type: type, success: data['success']});
-			}
-		} else {
-			if (data['start']) {
-                this.onForceSave({type: type, start: true});
-				this._lastForceSaveTimeoutTime = data['time'];
-			} else {
-				if (this._lastForceSaveTimeoutTime == data['time']) {
-					this.onForceSave({type: type, success: data['success']});
-				}
-			}
-		}
-	};
+  DocsCoApi.prototype._onForceSaveStart = function (data) {
+    var code = data['code'];
+    if (code === c_oAscServerCommandErrors.NoError) {
+      this._lastForceSaveButtonTime = data['time'];
+      this.onForceSave({ type: c_oAscForceSaveTypes.Button, start: true });
+    } else if (code === c_oAscServerCommandErrors.NotModified) {
+      this.onForceSave({ type: c_oAscForceSaveTypes.Button, refuse: true });
+    } else {
+      this.onWarning(Asc.c_oAscError.ID.Unknown);
+    }
+  };
+  DocsCoApi.prototype._onForceSave = function (data) {
+    var type = data['type'];
+    if (c_oAscForceSaveTypes.Button === type) {
+      if (this._lastForceSaveButtonTime == data['time']) {
+        this.onForceSave({ type: type, success: data['success'] });
+      }
+    } else {
+      if (data['start']) {
+        this.onForceSave({ type: type, start: true });
+        this._lastForceSaveTimeoutTime = data['time'];
+      } else {
+        if (this._lastForceSaveTimeoutTime == data['time']) {
+          this.onForceSave({ type: type, success: data['success'] });
+        }
+      }
+    }
+  };
 
-  DocsCoApi.prototype._onGetLock = function(data) {
+  DocsCoApi.prototype._onGetLock = function (data) {
     if (this.check_state() && data["locks"]) {
       for (var key in data["locks"]) {
         if (data["locks"].hasOwnProperty(key)) {
@@ -1190,14 +1194,14 @@
             }
 
             if (changed) {
-              this._locks[blockTmp] = {"state": lock["user"] === this._userId ? 2 : 3, "user": lock["user"], "time": lock["time"], "block": blockTmp, "blockValue": blockValue};//2-acquired by me!
+              this._locks[blockTmp] = { "state": lock["user"] === this._userId ? 2 : 3, "user": lock["user"], "time": lock["time"], "block": blockTmp, "blockValue": blockValue };//2-acquired by me!
             }
             if (this._lockCallbacks.hasOwnProperty(blockTmp)) {
               if (lock["user"] === this._userId) {
                 //Do call back
-                this._lockCallbacks[blockTmp]({"lock": this._locks[blockTmp]});
+                this._lockCallbacks[blockTmp]({ "lock": this._locks[blockTmp] });
               } else {
-                this._lockCallbacks[blockTmp]({"error": "Already locked by " + lock["user"]});
+                this._lockCallbacks[blockTmp]({ "error": "Already locked by " + lock["user"] });
               }
               if (this._lockCallbacksErrorTimerId.hasOwnProperty(blockTmp)) {
                 clearTimeout(this._lockCallbacksErrorTimerId[blockTmp]);
@@ -1214,14 +1218,14 @@
     }
   };
 
-  DocsCoApi.prototype._onReleaseLock = function(data) {
+  DocsCoApi.prototype._onReleaseLock = function (data) {
     if (this.check_state() && data["locks"]) {
       var bSendEnd = false;
       for (var block in data["locks"]) {
         if (data["locks"].hasOwnProperty(block)) {
           var lock = data["locks"][block], blockTmp = (this._isExcel || this._isPresentation) ? lock["block"]["guid"] : lock["block"];
           if (lock !== null) {
-            this._locks[blockTmp] = {"state": 0, "user": lock["user"], "time": lock["time"], "changes": lock["changes"], "block": lock["block"]};
+            this._locks[blockTmp] = { "state": 0, "user": lock["user"], "time": lock["time"], "changes": lock["changes"], "block": lock["block"] };
             if (this.onLocksReleased) {
               // false - user not save changes
               this.onLocksReleased(this._locks[blockTmp], false);
@@ -1236,11 +1240,11 @@
     }
   };
 
-  DocsCoApi.prototype._documentOpen = function(data) {
+  DocsCoApi.prototype._documentOpen = function (data) {
     this.onDocumentOpen(data);
   };
 
-  DocsCoApi.prototype._onSaveChanges = function(data, useEncryption) {
+  DocsCoApi.prototype._onSaveChanges = function (data, useEncryption) {
     if (!this.check_state()) {
       if (!this.get_isAuth()) {
         this._authOtherChanges.push(data);
@@ -1250,7 +1254,7 @@
     if (!data["endSaveChanges"]) {
       this._saveChangesChunks.push(data["changes"]);
       return;
-    } else if(this._saveChangesChunks.length > 0){
+    } else if (this._saveChangesChunks.length > 0) {
       this._saveChangesChunks.push(data["changes"]);
       var newChanges = [];
       data["changes"] = newChanges.concat.apply(newChanges, this._saveChangesChunks);
@@ -1265,7 +1269,7 @@
         if (data["locks"].hasOwnProperty(block)) {
           var lock = data["locks"][block], blockTmp = (this._isExcel || this._isPresentation) ? lock["block"]["guid"] : lock["block"];
           if (lock !== null) {
-            this._locks[blockTmp] = {"state": 0, "user": lock["user"], "time": lock["time"], "changes": lock["changes"], "block": lock["block"]};
+            this._locks[blockTmp] = { "state": 0, "user": lock["user"], "time": lock["time"], "changes": lock["changes"], "block": lock["block"] };
             if (this.onLocksReleased) {
               // true - lock with save
               this.onLocksReleased(this._locks[blockTmp], true);
@@ -1285,10 +1289,10 @@
     }
   };
 
-  DocsCoApi.prototype._onStartCoAuthoring = function(isStartEvent, isWaitAuth) {
+  DocsCoApi.prototype._onStartCoAuthoring = function (isStartEvent, isWaitAuth) {
     if (isWaitAuth && false === this.isCoAuthoring && !this.onStartCoAuthoring) {
       var errorMsg = 'Error: connection state changed waitAuth' +
-          ';this.onStartCoAuthoring:' + !!this.onStartCoAuthoring;
+        ';this.onStartCoAuthoring:' + !!this.onStartCoAuthoring;
       this.sendClientLog("error", "changesError: " + errorMsg);
     }
     if (false === this.isCoAuthoring) {
@@ -1304,7 +1308,7 @@
     }
   };
 
-  DocsCoApi.prototype._onEndCoAuthoring = function(isStartEvent) {
+  DocsCoApi.prototype._onEndCoAuthoring = function (isStartEvent) {
     if (true === this.isCoAuthoring) {
       this.isCoAuthoring = false;
       if (this.onEndCoAuthoring) {
@@ -1313,29 +1317,29 @@
     }
   };
 
-	DocsCoApi.prototype._onSaveLock = function (data) {
-		if (null != data["saveLock"]) {
-			var indexCallback = this._saveCallback.length - 1;
-			var oTmpCallback = this._saveCallback[indexCallback];
-			if (oTmpCallback) {
-				// Очищаем предыдущий таймер
-				if (null !== this.saveLockCallbackErrorTimeOutId) {
-					clearTimeout(this.saveLockCallbackErrorTimeOutId);
-					this.saveLockCallbackErrorTimeOutId = null;
-				}
+  DocsCoApi.prototype._onSaveLock = function (data) {
+    if (null != data["saveLock"]) {
+      var indexCallback = this._saveCallback.length - 1;
+      var oTmpCallback = this._saveCallback[indexCallback];
+      if (oTmpCallback) {
+        // Очищаем предыдущий таймер
+        if (null !== this.saveLockCallbackErrorTimeOutId) {
+          clearTimeout(this.saveLockCallbackErrorTimeOutId);
+          this.saveLockCallbackErrorTimeOutId = null;
+        }
 
-				this._saveCallback[indexCallback] = null;
-				oTmpCallback(data);
-			}
-		}
-		if (null == data["saveLock"] || data['error'] || data["saveLock"]) {
-			this._state = ConnectionState.Authorized;
-			// Делаем отложенные lock-и
-			this._sendBufferedLocks();
-		}
-	};
+        this._saveCallback[indexCallback] = null;
+        oTmpCallback(data);
+      }
+    }
+    if (null == data["saveLock"] || data['error'] || data["saveLock"]) {
+      this._state = ConnectionState.Authorized;
+      // Делаем отложенные lock-и
+      this._sendBufferedLocks();
+    }
+  };
 
-  DocsCoApi.prototype._onUnSaveLock = function(data) {
+  DocsCoApi.prototype._onUnSaveLock = function (data) {
     // Очищаем предыдущий таймер сохранения
     if (null !== this.saveCallbackErrorTimeOutId) {
       clearTimeout(this.saveCallbackErrorTimeOutId);
@@ -1356,7 +1360,7 @@
     if (-1 !== data['index']) {
       this.changesIndex = data['index'];
     }
-	
+
     if (-1 !== data['time']) {
       this.lastOwnSaveTime = data['time'];
     }
@@ -1364,13 +1368,13 @@
     if (undefined !== data['syncChangesIndex'] && -1 !== data['syncChangesIndex']) {
       this.syncChangesIndex = data['syncChangesIndex'];
     }
-	
+
     if (this.onUnSaveLock) {
       this.onUnSaveLock();
     }
   };
 
-  DocsCoApi.prototype._updateChanges = function(allServerChanges, changesIndex, syncChangesIndex, bFirstLoad) {
+  DocsCoApi.prototype._updateChanges = function (allServerChanges, changesIndex, syncChangesIndex, bFirstLoad) {
     if (this.onSaveChanges) {
       this.changesIndex = changesIndex;
       if (undefined !== syncChangesIndex && -1 !== syncChangesIndex) {
@@ -1393,18 +1397,18 @@
     }
   };
 
-  DocsCoApi.prototype._onSetIndexUser = function(data) {
+  DocsCoApi.prototype._onSetIndexUser = function (data) {
     if (this.onSetIndexUser) {
       this.onSetIndexUser(data);
     }
   };
-  DocsCoApi.prototype._onSpellCheckInit = function(data) {
+  DocsCoApi.prototype._onSpellCheckInit = function (data) {
     if (this.onSpellCheckInit) {
       this.onSpellCheckInit(data);
     }
   };
 
-  DocsCoApi.prototype._onSavePartChanges = function(data) {
+  DocsCoApi.prototype._onSavePartChanges = function (data) {
     // Очищаем предыдущий таймер
     if (null !== this.saveCallbackErrorTimeOutId) {
       clearTimeout(this.saveCallbackErrorTimeOutId);
@@ -1422,7 +1426,7 @@
     this.saveChanges(this.arrayChanges, this.currentIndexEnd);
   };
 
-  DocsCoApi.prototype._onPreviousLocks = function(locks, previousLocks) {
+  DocsCoApi.prototype._onPreviousLocks = function (locks, previousLocks) {
     var i = 0;
     if (locks && previousLocks) {
       for (var block in locks) {
@@ -1447,7 +1451,7 @@
     }
   };
 
-  DocsCoApi.prototype._onParticipantsChanged = function(participants, needChanged) {
+  DocsCoApi.prototype._onParticipantsChanged = function (participants, needChanged) {
     var participantsNew = {};
     var countEditUsersNew = 0;
     var countUsersNew = 0;
@@ -1486,7 +1490,7 @@
     this._countUsers = countUsersNew;
     return usersStateChanged;
   };
-  DocsCoApi.prototype._onAuthParticipantsChanged = function(participants) {
+  DocsCoApi.prototype._onAuthParticipantsChanged = function (participants) {
     this._participants = {};
     this._countEditUsers = 0;
     this._countUsers = 0;
@@ -1508,7 +1512,7 @@
     }
   };
 
-  DocsCoApi.prototype._onConnectionStateChanged = function(data) {
+  DocsCoApi.prototype._onConnectionStateChanged = function (data) {
     var t = this;
     if (!this.check_state()) {
       this._msgInputBuffer.push(function () {
@@ -1518,11 +1522,11 @@
     }
     var isWaitAuth = data['waitAuth'];
     var usersStateChanged;
-    if(isWaitAuth && !(this.onConnectionStateChanged && (!this._participantsTimestamp || this._participantsTimestamp <= data['participantsTimestamp']))) {
+    if (isWaitAuth && !(this.onConnectionStateChanged && (!this._participantsTimestamp || this._participantsTimestamp <= data['participantsTimestamp']))) {
       var errorMsg = 'Error: connection state changed waitAuth' +
-          ';onConnectionStateChanged:' + !!this.onConnectionStateChanged +
-          ';this._participantsTimestamp:' + this._participantsTimestamp +
-          ';data.participantsTimestamp:' + data['participantsTimestamp'];
+        ';onConnectionStateChanged:' + !!this.onConnectionStateChanged +
+        ';this._participantsTimestamp:' + this._participantsTimestamp +
+        ';data.participantsTimestamp:' + data['participantsTimestamp'];
       this.sendClientLog("error", "changesError: " + errorMsg);
     }
     if (this.onConnectionStateChanged && (!this._participantsTimestamp || this._participantsTimestamp <= data['participantsTimestamp'])) {
@@ -1533,8 +1537,8 @@
 
       if (isWaitAuth && !(usersStateChanged.length > 0 && 1 < this._countEditUsers)) {
         var errorMsg = 'Error: connection state changed waitAuth' +
-            ';usersStateChanged:' + JSON.stringify(usersStateChanged) +
-            ';this._countEditUsers:' + this._countEditUsers;
+          ';usersStateChanged:' + JSON.stringify(usersStateChanged) +
+          ';this._countEditUsers:' + this._countEditUsers;
         this.sendClientLog("error", "changesError: " + errorMsg);
       }
       if (usersStateChanged.length > 0) {
@@ -1557,28 +1561,28 @@
     this.onLicenseChanged(data);
   };
 
-  DocsCoApi.prototype._onDisconnectReason = function(data) {
+  DocsCoApi.prototype._onDisconnectReason = function (data) {
     var code = data && data['code'] || c_oCloseCode.drop;
     this.onDisconnect(data ? data['description'] : '', code);
   };
 
-  DocsCoApi.prototype._onDrop = function(data) {
+  DocsCoApi.prototype._onDrop = function (data) {
     this.disconnect();
     this._onDisconnectReason(data);
   };
 
-  DocsCoApi.prototype._onWarning = function(data) {
+  DocsCoApi.prototype._onWarning = function (data) {
     this.onWarning(Asc.c_oAscError.ID.Warning);
   };
 
-  DocsCoApi.prototype._onLicense = function(data) {
+  DocsCoApi.prototype._onLicense = function (data) {
     if (!this.isLicenseInit) {
       this.isLicenseInit = true;
       this.onLicense(data['license']);
     }
   };
 
-  DocsCoApi.prototype._onAuth = function(data) {
+  DocsCoApi.prototype._onAuth = function (data) {
     var t = this;
     this._onRefreshToken(data['jwt']);
     if (true === this._isAuth) {
@@ -1606,11 +1610,11 @@
 
       if (this._isReSaveAfterAuth) {
         this._isReSaveAfterAuth = false;
-        var callbackAskSaveChanges = function(e) {
+        var callbackAskSaveChanges = function (e) {
           if (false === e["saveLock"]) {
             t._reSaveChanges(2);
           } else {
-            setTimeout(function() {
+            setTimeout(function () {
               t.askSaveChanges(callbackAskSaveChanges);
             }, 1000);
           }
@@ -1677,11 +1681,11 @@
     }
     //TODO: Add errors
   };
-  DocsCoApi.prototype._onAuthChanges = function(data) {
+  DocsCoApi.prototype._onAuthChanges = function (data) {
     this._authChanges.push(data["changes"]);
-    this._send({'type': 'authChangesAck'});
+    this._send({ 'type': 'authChangesAck' });
   };
-  DocsCoApi.prototype._updateAuthChanges = function() {
+  DocsCoApi.prototype._updateAuthChanges = function () {
     //todo apply changes with chunk on arrival
     var changesIndex = 0, i, changes, data, indexDiff;
     for (i = 0; i < this._authChanges.length; ++i) {
@@ -1706,7 +1710,7 @@
     this._authOtherChanges = [];
   };
 
-  DocsCoApi.prototype.init = function(user, docid, documentCallbackUrl, token, editorType, documentFormatSave, docInfo) {
+  DocsCoApi.prototype.init = function (user, docid, documentCallbackUrl, token, editorType, documentFormatSave, docInfo) {
     this._user = user;
     this._docid = null;
     this._documentCallbackUrl = documentCallbackUrl;
@@ -1718,27 +1722,29 @@
     this._isPresentation = c_oEditorId.Presentation === editorType;
     this._isAuth = false;
     this._documentFormatSave = documentFormatSave;
-	this.mode = docInfo.get_Mode();
-	this.permissions = docInfo.get_Permissions();
-	this.lang = docInfo.get_Lang();
-	this.jwtOpen = docInfo.get_Token();
+    this.mode = docInfo.get_Mode();
+    this.permissions = docInfo.get_Permissions();
+    this.lang = docInfo.get_Lang();
+    this.jwtOpen = docInfo.get_Token();
     this.encrypted = docInfo.get_Encrypted();
     this.IsAnonymousUser = docInfo.get_IsAnonymousUser();
     this.coEditingMode = docInfo.asc_getCoEditingMode();
 
+    console.log('初始化DocsCoApi')
+    debugger;
     this.setDocId(docid);
     this._initSocksJs();
   };
-  DocsCoApi.prototype.getDocId = function() {
+  DocsCoApi.prototype.getDocId = function () {
     return this._docid;
   };
-  DocsCoApi.prototype.setDocId = function(docid) {
+  DocsCoApi.prototype.setDocId = function (docid) {
     //todo возможно надо менять sockjs_url
     this._docid = docid;
     this.socketio_url = AscCommon.getBaseUrlPathname() + '../../../../doc/' + docid + '/c';
   };
   // Авторизация (ее нужно делать после выставления состояния редактора view-mode)
-  DocsCoApi.prototype.auth = function(isViewer, opt_openCmd, opt_isIdle) {
+  DocsCoApi.prototype.auth = function (isViewer, opt_openCmd, opt_isIdle) {
     this._isViewer = isViewer;
     if (this._locks) {
       this.ownedLockBlocks = [];
@@ -1768,7 +1774,7 @@
       'lastOtherSaveTime': this.lastOtherSaveTime,
       'block': this.ownedLockBlocks,
       'sessionId': this._id,
-	  'sessionTimeConnect': this._sessionTimeConnect,
+      'sessionTimeConnect': this._sessionTimeConnect,
       'sessionTimeIdle': opt_isIdle >= 0 ? opt_isIdle : 0,
       'documentFormatSave': this._documentFormatSave,
       'view': this._isViewer,
@@ -1788,8 +1794,7 @@
     });
   };
 
-  function CNativeSocket(settings)
-  {
+  function CNativeSocket(settings) {
     this.engine = window['SockJS'];
     this.settings = settings;
     this.io = this;
@@ -1797,15 +1802,15 @@
 
     this.events = {};
   }
-  CNativeSocket.prototype.open = function() { return this.engine.open(this.settings); };
-  CNativeSocket.prototype.send = function(message) { return this.engine.send(message); };
-  CNativeSocket.prototype.close = function() { return this.engine.close(); };
-  CNativeSocket.prototype.emit = function(message, data) { return this.send(JSON.stringify(data)); };
+  CNativeSocket.prototype.open = function () { return this.engine.open(this.settings); };
+  CNativeSocket.prototype.send = function (message) { return this.engine.send(message); };
+  CNativeSocket.prototype.close = function () { return this.engine.close(); };
+  CNativeSocket.prototype.emit = function (message, data) { return this.send(JSON.stringify(data)); };
 
-  CNativeSocket.prototype.reconnectionAttempts = function(val) { this.settings["reconnectionAttempts"] = val; };
-  CNativeSocket.prototype.reconnectionDelay    = function(val) { this.settings["reconnectionDelay"] = val; };
-  CNativeSocket.prototype.reconnectionDelayMax = function(val) { this.settings["reconnectionDelayMax"] = val; };
-  CNativeSocket.prototype.randomizationFactor  = function(val) { this.settings["randomizationFactor"] = val; };
+  CNativeSocket.prototype.reconnectionAttempts = function (val) { this.settings["reconnectionAttempts"] = val; };
+  CNativeSocket.prototype.reconnectionDelay = function (val) { this.settings["reconnectionDelay"] = val; };
+  CNativeSocket.prototype.reconnectionDelayMax = function (val) { this.settings["reconnectionDelayMax"] = val; };
+  CNativeSocket.prototype.randomizationFactor = function (val) { this.settings["randomizationFactor"] = val; };
   CNativeSocket.prototype.setOpenToken = function (val) {
     if (this.settings["auth"]) {
       this.settings["auth"]["token"] = val;
@@ -1817,15 +1822,14 @@
     }
   };
 
-  CNativeSocket.prototype.on = function(name, callback) {
+  CNativeSocket.prototype.on = function (name, callback) {
     if (!this.events.hasOwnProperty(name))
       this.events[name] = [];
     this.events[name].push(callback);
   };
-  CNativeSocket.prototype.onMessage = function() {
+  CNativeSocket.prototype.onMessage = function () {
     var name = arguments[0];
-    if (this.events.hasOwnProperty(name))
-    {
+    if (this.events.hasOwnProperty(name)) {
       for (var i = 0; i < this.events[name].length; ++i)
         this.events[name][i].apply(this, Array.prototype.slice.call(arguments, 1));
       return true;
@@ -1833,169 +1837,172 @@
     return false;
   };
 
-	DocsCoApi.prototype._initSocksJs = function () {
-      var t = this;
-      let socket;
-      let firstConnection = true;
-      let options = {
-        "path": this.socketio_url,
-        "transports": ["websocket", "polling"],
-        "closeOnBeforeunload": false,
-        "reconnectionAttempts": 15,
-        "reconnectionDelay": 500,
-        "reconnectionDelayMax": 10000,
-        "randomizationFactor": 0.5,
-        "auth": {
-          "token": this.jwtOpen,
-          "session": this.jwtSession
-        }
-      };
-      if (window['IS_NATIVE_EDITOR']) {
-        socket = this.sockjs = new CNativeSocket(options);
-        socket.open();
-      } else {
-        let io = AscCommon.getSocketIO();
-        socket = io(options);
+  DocsCoApi.prototype._initSocksJs = function () {
+    console.log('初始化服务端链接')
+    var t = this;
+    let socket;
+    let firstConnection = true;
+    let options = {
+      "path": this.socketio_url,
+      "transports": ["websocket", "polling"],
+      "closeOnBeforeunload": false,
+      "reconnectionAttempts": 15,
+      "reconnectionDelay": 500,
+      "reconnectionDelayMax": 10000,
+      "randomizationFactor": 0.5,
+      "auth": {
+        "token": this.jwtOpen,
+        "session": this.jwtSession
       }
-      socket.on("connect", function () {
-        firstConnection = false;
-        t._onServerOpen();
-      });
-      socket.on("disconnect", function (reason) {
-        //(explicit disconnection), the client will not try to reconnect and you need to manually call
-        let explicit = 'io server disconnect' === reason || 'io client disconnect' === reason;
-        t._onServerClose(explicit);
-        if (!explicit) {
-          //explicit disconnect sends disconnect reason on its own
-          t.onDisconnect();
-        }
-      });
-      socket.on('connect_error', function (err) {
-        //cases: every connect error and reconnect
-        if (err.data) {
-          //cases: authorization
-          t._onServerClose(true);
-          t.onDisconnect(err.data.description, err.data.code);
-        } else if (firstConnection) {
-          firstConnection = false;
-          if (socket.io.opts) {
-            socket.io.opts.transports = ["polling", "websocket"];
-          }
-        }
-      });
-      socket.io.on("reconnect_failed", function () {
-        //cases: connection restore, wrong socketio_url
+    };
+    if (window['IS_NATIVE_EDITOR']) {
+      socket = this.sockjs = new CNativeSocket(options);
+      socket.open();
+    } else {
+      let io = AscCommon.getSocketIO();
+      socket = io(options);
+    }
+    socket.on("connect", function () {
+      firstConnection = false;
+      t._onServerOpen();
+    });
+    socket.on("disconnect", function (reason) {
+      //(explicit disconnection), the client will not try to reconnect and you need to manually call
+      let explicit = 'io server disconnect' === reason || 'io client disconnect' === reason;
+      t._onServerClose(explicit);
+      if (!explicit) {
+        //explicit disconnect sends disconnect reason on its own
+        t.onDisconnect();
+      }
+    });
+    socket.on('connect_error', function (err) {
+      //cases: every connect error and reconnect
+      if (err.data) {
+        //cases: authorization
         t._onServerClose(true);
-        t.onDisconnect("reconnect_failed", c_oCloseCode.restore);
-      });
-      socket.on("message", function (data) {
-        t._onServerMessage(data);
-      });
-      this.socketio = socket;
-      return socket;
-	};
+        t.onDisconnect(err.data.description, err.data.code);
+      } else if (firstConnection) {
+        firstConnection = false;
+        if (socket.io.opts) {
+          socket.io.opts.transports = ["polling", "websocket"];
+        }
+      }
+    });
+    socket.io.on("reconnect_failed", function () {
+      //cases: connection restore, wrong socketio_url
+      t._onServerClose(true);
+      t.onDisconnect("reconnect_failed", c_oCloseCode.restore);
+    });
+    socket.on("message", function (data) {
+      console.log('收到ws链接消息',data)
+      t._onServerMessage(data);
+    });
+    this.socketio = socket;
+    return socket;
+  };
 
-	DocsCoApi.prototype._onServerOpen = function () {
-		this._state = ConnectionState.WaitAuth;
-		this.onFirstConnect();
-	};
-	DocsCoApi.prototype._onServerMessage = function (data) {
-		//TODO: add checks and error handling
-		//Get data type
-		var dataObject = data;
-		switch (dataObject['type']) {
-			case 'auth'        :
-				this._onAuth(dataObject);
-				break;
-			case 'message'      :
-				this._onMessages(dataObject, false);
-				break;
-			case 'cursor'       :
-				this._onCursor(dataObject);
-				break;
-			case 'meta' :
-				this._onMeta(dataObject);
-				break;
-			case 'getLock'      :
-				this._onGetLock(dataObject);
-				break;
-			case 'releaseLock'    :
-				this._onReleaseLock(dataObject);
-				break;
-			case 'connectState'    :
-				this._onConnectionStateChanged(dataObject);
-				break;
-			case 'saveChanges'    :
-				this._onSaveChanges(dataObject);
-				break;
-			case 'authChanges' :
-				this._onAuthChanges(dataObject);
-				break;
-			case 'saveLock'      :
-				this._onSaveLock(dataObject);
-				break;
-			case 'unSaveLock'    :
-				this._onUnSaveLock(dataObject);
-				break;
-			case 'savePartChanges'  :
-				this._onSavePartChanges(dataObject);
-				break;
-			case 'drop'        :
-				this._onDrop(dataObject);
-				break;
-			case 'disconnectReason':
-				this._onDisconnectReason(dataObject);
-				break;
-			case 'waitAuth'      : /*Ждем, когда придет auth, документ залочен*/
-				break;
-			case 'error'      : /*Старая версия sdk*/
-				this._onDrop(dataObject);
-				break;
-			case 'documentOpen'    :
-				this._documentOpen(dataObject);
-				break;
-			case 'warning':
-				this._onWarning(dataObject);
-				break;
-			case 'license':
-				this._onLicense(dataObject);
-				break;
-			case 'session' :
-				this._onSession(dataObject);
-				break;
-			case 'refreshToken' :
-				this._onRefreshToken(dataObject["messages"]);
-				break;
-			case 'expiredToken' :
-				this._onExpiredToken(dataObject);
-				break;
-			case 'forceSaveStart' :
-				this._onForceSaveStart(dataObject["messages"]);
-				break;
-			case 'forceSave' :
-				this._onForceSave(dataObject["messages"]);
-				break;
-			case 'rpc' :
-				this._onPRC(dataObject["responseKey"], false, dataObject["data"]);
-				break;
-		}
-	};
-	DocsCoApi.prototype._onServerClose = function (explicit) {
-		if (ConnectionState.SaveChanges === this._state) {
-			// Мы сохраняли изменения и разорвалось соединение
-			this._isReSaveAfterAuth = true;
-			// Очищаем предыдущий таймер
-			if (null !== this.saveCallbackErrorTimeOutId) {
-				clearTimeout(this.saveCallbackErrorTimeOutId);
-				this.saveCallbackErrorTimeOutId = null;
-			}
-		}
-		if (explicit) {
-			this._state = ConnectionState.ClosedAll;
-		} else {
-			this._state = ConnectionState.Reconnect;
-		}
-	};
+  DocsCoApi.prototype._onServerOpen = function () {
+    this._state = ConnectionState.WaitAuth;
+    this.onFirstConnect();
+  };
+  DocsCoApi.prototype._onServerMessage = function (data) {
+    //TODO: add checks and error handling
+    //Get data type
+    var dataObject = data;
+    console.log('收到服务端消息', dataObject)
+    switch (dataObject['type']) {
+      case 'auth':
+        this._onAuth(dataObject);
+        break;
+      case 'message':
+        this._onMessages(dataObject, false);
+        break;
+      case 'cursor':
+        this._onCursor(dataObject);
+        break;
+      case 'meta':
+        this._onMeta(dataObject);
+        break;
+      case 'getLock':
+        this._onGetLock(dataObject);
+        break;
+      case 'releaseLock':
+        this._onReleaseLock(dataObject);
+        break;
+      case 'connectState':
+        this._onConnectionStateChanged(dataObject);
+        break;
+      case 'saveChanges':
+        this._onSaveChanges(dataObject);
+        break;
+      case 'authChanges':
+        this._onAuthChanges(dataObject);
+        break;
+      case 'saveLock':
+        this._onSaveLock(dataObject);
+        break;
+      case 'unSaveLock':
+        this._onUnSaveLock(dataObject);
+        break;
+      case 'savePartChanges':
+        this._onSavePartChanges(dataObject);
+        break;
+      case 'drop':
+        this._onDrop(dataObject);
+        break;
+      case 'disconnectReason':
+        this._onDisconnectReason(dataObject);
+        break;
+      case 'waitAuth': /*Ждем, когда придет auth, документ залочен*/
+        break;
+      case 'error': /*Старая версия sdk*/
+        this._onDrop(dataObject);
+        break;
+      case 'documentOpen':
+        this._documentOpen(dataObject);
+        break;
+      case 'warning':
+        this._onWarning(dataObject);
+        break;
+      case 'license':
+        this._onLicense(dataObject);
+        break;
+      case 'session':
+        this._onSession(dataObject);
+        break;
+      case 'refreshToken':
+        this._onRefreshToken(dataObject["messages"]);
+        break;
+      case 'expiredToken':
+        this._onExpiredToken(dataObject);
+        break;
+      case 'forceSaveStart':
+        this._onForceSaveStart(dataObject["messages"]);
+        break;
+      case 'forceSave':
+        this._onForceSave(dataObject["messages"]);
+        break;
+      case 'rpc':
+        this._onPRC(dataObject["responseKey"], false, dataObject["data"]);
+        break;
+    }
+  };
+  DocsCoApi.prototype._onServerClose = function (explicit) {
+    if (ConnectionState.SaveChanges === this._state) {
+      // Мы сохраняли изменения и разорвалось соединение
+      this._isReSaveAfterAuth = true;
+      // Очищаем предыдущий таймер
+      if (null !== this.saveCallbackErrorTimeOutId) {
+        clearTimeout(this.saveCallbackErrorTimeOutId);
+        this.saveCallbackErrorTimeOutId = null;
+      }
+    }
+    if (explicit) {
+      this._state = ConnectionState.ClosedAll;
+    } else {
+      this._state = ConnectionState.Reconnect;
+    }
+  };
   //----------------------------------------------------------export----------------------------------------------------
   window['AscCommon'] = window['AscCommon'] || {};
   window['AscCommon'].CDocsCoApi = CDocsCoApi;

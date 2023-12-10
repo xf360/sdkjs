@@ -1904,10 +1904,12 @@ function ShapeToImageConverter(shape, pageIndex, sImageFormat)
     AscCommon.IsShapeToImageConverter = false;
 
     var _ret = { ImageNative : _canvas, ImageUrl : "" };
+    
     try
     {
         const sFormat = sImageFormat || "image/png";
         _ret.ImageUrl = _canvas.toDataURL(sFormat);
+        console.log("ShapeToImageConverter",_ret.ImageUrl)
     }
     catch (err)
     {

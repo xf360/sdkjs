@@ -337,8 +337,11 @@
 		}
 	};
 
+	//编辑器输入事件
 	CTextInputPrototype.onInput = function(e)
 	{
+		
+		// debugger;
 		if (this.Api.isLongAction())
 		{
 			AscCommon.stopEvent(e);
@@ -351,6 +354,7 @@
 		type = type.toLowerCase()
 
 		let newValue = this.getAreaValue();
+		console.log('编辑器输入：',newValue,e)
 		this.log("onInput: " + newValue);
 
 		if (-1 !== newValue.indexOf("&nbsp;"))
@@ -438,7 +442,7 @@
 				return;
 			}
 
-			// добавляем новые
+			// добавляем новые 添加新的
 			isAsyncInput = this.checkTextInput(codesNew, codesRemove);
 		}
 
@@ -872,6 +876,8 @@
 	// html element
 	CTextInputPrototype.init = function(target_id, parent_id)
 	{
+		debugger;
+		console.log('text_input2:----init')
 		this.TargetId   = target_id;
 
 		this.HtmlDiv                  = document.createElement("div");
@@ -980,6 +986,8 @@
 		{
 			this.HtmlArea.addEventListener(inputEvents[i], function(e)
 			{
+				//
+				console.log('输入事件',e);
 				return oThis.onInput(e);
 			}, false);
 		}
