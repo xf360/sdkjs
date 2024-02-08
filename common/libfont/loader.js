@@ -79,6 +79,8 @@
 
 	window['AscFonts'].load = function(api, onSuccess, onError)
 	{
+		// debugger;
+		console.log('windo.AscFonts.load----加载字体模块：',api)
 		window['AscFonts'].api = api;
 		window['AscFonts'].onSuccess = onSuccess;
 		window['AscFonts'].onError = onError;
@@ -180,7 +182,7 @@
 	window['AscFonts'].FT_Memory = FT_Memory;
 	window['AscFonts'].g_memory = new FT_Memory();
 
-	// память для растеризации буквы
+	// память для растеризации буквы 光栅存储器
 	function CRasterMemory()
 	{
 		this.width = 0;
@@ -190,7 +192,7 @@
 		this.m_oBuffer = null;
 		this.CheckSize = function(w, h)
 		{
-			let extra = 10; // с запасом под device pixelratio
+			let extra = 10; // с запасом под device pixelratio 设备像素比
 			if (this.width < (w + extra) || this.height < (h + extra))
 			{
 				this.width = Math.max(this.width, w + extra);
@@ -198,6 +200,8 @@
 				this.height = Math.max(this.height, h + extra);
 
 				this.m_oBuffer = null;
+				// debugger;
+				console.log('字形缓存CRasterMemory，初始化一个字形宽高的图片资源')
 				this.m_oBuffer = window['AscFonts'].g_memory.ctx.createImageData(this.width, this.height);
 			}
 		};

@@ -876,7 +876,7 @@
 	// html element
 	CTextInputPrototype.init = function(target_id, parent_id)
 	{
-		debugger;
+		// debugger;
 		console.log('text_input2:----init')
 		this.TargetId   = target_id;
 

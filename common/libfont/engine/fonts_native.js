@@ -31,7 +31,7 @@
  */
 
 (function(window, undefined) {
-
+debugger;
 window['AscFonts'] = window['AscFonts'] || {};
 var AscFonts = window['AscFonts'];
 

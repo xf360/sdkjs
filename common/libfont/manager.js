@@ -36,15 +36,16 @@
 
 	function CFontManagerEngine()
 	{
+		console.log('初始化freetype----FT_CreateLibrary')
 		this.library = AscFonts.FT_CreateLibrary();
 		this.manager = null;
 
 		this.openFont = function(stream, faceindex)
 		{
+			console.warn('manager.js----openFont：使用freetype的FT_Open_Face方法加载字体stream',stream, faceindex)
 			var face = AscFonts.FT_Open_Face(this.library, stream, faceindex);
 			if (!face)
 				return null;
-
 			var font = new AscFonts.CFontFile();
 			font.SetFace(face, this.manager);
 
@@ -80,6 +81,7 @@
 
 		this.LoadFontFile = function(stream_index, name, faceindex, fontManager)
 		{
+			console.log('manager.js---LoadFontFile：加载字体',stream_index, name, faceindex, )
 			if (!fontManager._engine)
 			{
 				fontManager._engine = new CFontManagerEngine();
@@ -107,6 +109,7 @@
 				return pFontFile;
 
 			pFontFile = this.Fonts[key] = this.LoadFontFile(stream_index, fontName, faceIndex, fontManager);
+			console.log(`字体加载完成,字体key${key}`,this.Fonts)
 			return pFontFile;
 		};
 	}
@@ -320,7 +323,8 @@
 				_g.oBitmap = null;
 				_g.eState = AscFonts.EGlyphState.glyphstateNormal;
 				_g.lUnicode = gid;
-
+				// debugger;
+				console.log('绘制字体图片')
 				this.m_pFont.GetString2C(string);
 
 				this.SetStringGID(false);

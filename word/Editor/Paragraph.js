@@ -1796,7 +1796,8 @@ Paragraph.prototype.Draw = function (CurPage, pGraphics) {
 		// Нам надо выяснить заливку у родительского класса (возможно мы находимся в ячейке таблицы с забивкой)
 		BgColor = this.Parent.Get_TextBackGroundColor();
 	}
-	debugger;
+	// debugger;
+	console.log('paragraph.js---Draw:绘制段落内容，')
 	/*
 //1图片部分：
 //如果该段被另一个用户夹住，则在该段的左侧绘制一个符号
@@ -1827,7 +1828,8 @@ Paragraph.prototype.Draw = function (CurPage, pGraphics) {
 	//    Рисуем сами элементы параграфа
 	//4素描部分：
 	//画出段落的元素
-	debugger;
+	// debugger;
+	console.log('paragraph.js---Draw:画出段落的元素，',CurPage, pGraphics, Pr, drawState, BgColor, this.GetTheme(), this.GetColorMap())
 	this.Internal_Draw_4(CurPage, pGraphics, Pr, drawState, BgColor, this.GetTheme(), this.GetColorMap());
 
 	// 5 часть отрисовки :
@@ -2543,7 +2545,7 @@ Paragraph.prototype.Internal_Draw_3 = function (CurPage, pGraphics, Pr, drawStat
 	}
 };
 Paragraph.prototype.Internal_Draw_4 = function (CurPage, pGraphics, Pr, drawState, BgColor, Theme, ColorMap) {
-	debugger;
+	// debugger;
 	console.log('Internal_Draw_4---绘制段落元素')
 	let PDSE = drawState.getRunElementState();
 	PDSE.Reset(BgColor, Theme, ColorMap);

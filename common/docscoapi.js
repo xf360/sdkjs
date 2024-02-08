@@ -1731,7 +1731,7 @@
     this.coEditingMode = docInfo.asc_getCoEditingMode();
 
     console.log('初始化DocsCoApi')
-    debugger;
+    // debugger;
     this.setDocId(docid);
     this._initSocksJs();
   };

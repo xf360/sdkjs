@@ -1793,7 +1793,8 @@ CSelectedElementsInfo.prototype.IsFixedFormShape = function()
  */
 function CDocument(DrawingDocument, isMainLogicDocument)
 {
-	debugger;
+	// debugger;
+	console.log('初始化CDocument类',DrawingDocument, isMainLogicDocument)
 	CDocumentContentBase.call(this);
 
     //------------------------------------------------------------------------------------------------------------------
@@ -2342,7 +2343,8 @@ CDocument.prototype.private_UpdateFieldsOnEndLoad = function()
 };
 CDocument.prototype.Add_TestDocument               = function()
 {
-	debugger;
+	// debugger;
+	console.log('CDocument.Add_TestDocument ---添加测试文档')
     this.Content   = [];
     var Text       = ["Comparison view helps you track down memory leaks, by displaying which objects have been correctly cleaned up by the garbage collector. Generally used to record and compare two (or more) memory snapshots of before and after an operation. The idea is that inspecting the delta in freed memory and reference count lets you confirm the presence and cause of a memory leak.", "Containment view provides a better view of object structure, helping us analyse objects referenced in the global namespace (i.e. window) to find out what is keeping them around. It lets you analyse closures and dive into your objects at a low level.", "Dominators view helps confirm that no unexpected references to objects are still hanging around (i.e that they are well contained) and that deletion/garbage collection is actually working."];
     var ParasCount = 50;
@@ -5612,17 +5614,20 @@ CDocument.prototype.Draw                                     = function(nPageInd
             for (var ContentPos = ColumnStartPos; ContentPos <= ColumnEndPos; ++ContentPos)
             {
 				//获取段落
-				debugger;
+				// debugger;
+				
             	var oElement = this.Content[ContentPos];
+				console.log('获取段落',ContentPos,oElement)
             	if (Page.IsFlowTable(oElement) || Page.IsFrame(oElement))
             		continue;
 
 				var ElementPageIndex = this.private_GetElementPageIndex(ContentPos, nPageIndex, ColumnIndex, ColumnsCount);
-				debugger;
+				// debugger;
+				console.log('获取页码',ElementPageIndex)
 				let x= window._shaohui_page;
 				this.Content[ContentPos].Draw(ElementPageIndex, pGraphics);
 				let y= window._shaohui_page;
-				debugger;
+				// debugger;
             }
 
             if (ColumnsCount > 1)
@@ -11849,20 +11854,27 @@ CDocument.prototype.Document_CreateFontCharMap = function(FontCharMap)
 		this.Content[Index].CreateFontCharMap(FontCharMap);
 	}
 };
+//获取文档使用的所有字体
 CDocument.prototype.Document_Get_AllFontNames = function()
 {
 	var AllFonts = {};
 
 	this.SectionsInfo.Document_Get_AllFontNames(AllFonts);
+	console.log('从SectionsInfo中获取使用的字体：',AllFonts)
 	this.Numbering.GetAllFontNames(AllFonts);
+	console.log('从Numbering中获取使用的字体：',AllFonts)
 	this.Styles.Document_Get_AllFontNames(AllFonts);
+	console.log('从Styles中获取使用的字体：',AllFonts)
 	this.theme.Document_Get_AllFontNames(AllFonts);
+	console.log('从themes中获取使用的字体：',AllFonts)
 
 	for (var nIndex = 0, nCount = this.Content.length; nIndex < nCount; ++nIndex)
 	{
 		this.Content[nIndex].GetAllFontNames(AllFonts);
 	}
+	console.log('从Content中获取使用的字体：',AllFonts)
 	AscFormat.checkThemeFonts(AllFonts, this.theme.themeElements.fontScheme);
+	console.log('从theme中获取使用的字体：',AllFonts)
 	return AllFonts;
 };
 CDocument.prototype.Document_UpdateInterfaceState = function(bSaveCurRevisionChange)

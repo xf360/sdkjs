@@ -68,6 +68,7 @@
 	{
 		init : function(infos)
 		{
+			console.log('CFontByCharacter--init:解析__fonts_ranges')
 			var fonts = window["__fonts_ranges"];
 			if (!fonts)
 				return;

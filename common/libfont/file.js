@@ -125,8 +125,7 @@
 		return false;
 	};
 
-	var raster_memory = AscFonts.raster_memory;
-	debugger;
+	var raster_memory = AscFonts.raster_memory;//字形的光栅数据
 
 	var FONT_ITALIC_ANGLE 	= 0.3090169943749;
 	var REND_MODE 			= AscFonts.FT_Render_Mode.FT_RENDER_MODE_NORMAL;
@@ -377,9 +376,9 @@
 
 	function CGlyphBitmap()
 	{
-		this.nX = 0;            // Сдвиг по X начальной точки для рисования символа
+		this.nX = 0;            // Сдвиг по X начальной точки для рисования символа 绘制符号的起始点X移动
 		this.nY = 0;            // Сдвиг по Y начальной точки для рисования символа
-		this.nWidth = 0;        // Ширина символа
+		this.nWidth = 0;        // Ширина символа 字符宽度
 		this.nHeight = 0;       // Высота символа
 
 		this.oGlyphData = new CGlyphData();
@@ -413,7 +412,8 @@
 
 			if (true)
 			{
-				debugger;
+				// debugger;
+				console.log('绘制字形---CGlyphBitmap.fromAlphaMask')
 				// 绘制字体到当前canvas
 				if (this.nWidth > 0 && this.nHeight > 0)
 					ctx.putImageData(raster_memory.m_oBuffer, _x, _y, 0, 0, this.nWidth, this.nHeight);
@@ -439,7 +439,7 @@
 					ctx.putImageData(raster_memory.m_oBuffer, _x, _y, 0, 0, this.nWidth, this.nHeight);
 			}
 			console.log(ctx.canvas.toDataURL());
-			debugger;
+			// debugger;
 			if (null != raster_memory.m_oBuffer)
 			{
 				var nIndexDst = 3;
@@ -459,7 +459,8 @@
 
 		draw: function (context2D, x, y)
 		{
-			debugger;
+			// debugger;
+			console.log('file.js-----draw')
 			var nW = this.nWidth;
 			var nH = this.nHeight;
 			if (null != this.oGlyphData.TempImage)
@@ -592,9 +593,9 @@
 
 	function CFontCacheSizes()
 	{
-		this.ushUnicode; // Значение символа в юникоде
-		this.eState;     // Есть ли символ в шрифте/стандартном шрифте
-		this.nCMapIndex; // Номер таблицы 'cmap', в которой был найден данный символ
+		this.ushUnicode; // Значение символа в юникоде Unicode字符值
+		this.eState;     // Есть ли символ в шрифте/стандартном шрифте 字体/标准字体中是否有符号
+		this.nCMapIndex; // Номер таблицы 'cmap', в которой был найден данный символ 找到该符号的“CMAP”表编号
 
 		this.ushGID;
 
@@ -614,7 +615,7 @@
 
 	function CGlyphVectorPainter()
 	{
-		// сдвиг
+		// сдвиг 位移
 		this.X = 0;
 		this.Y = 0;
 
@@ -1060,9 +1061,11 @@
 
 			return segments;
 		};
-
+		//缓存字形
 		this.CacheGlyph = function(glyph_index_or_unicode, isRaster, isRasterDistances, workerVector, workerVectorX, workerVectorY, isFromPicker)
 		{
+			// debugger;
+			console.log('缓存字形----CacheGlyph',glyph_index_or_unicode, isRaster, isRasterDistances, workerVector, workerVectorX, workerVectorY, isFromPicker)
 			var oSizes = new CFontCacheSizes();
 			oSizes.ushUnicode = glyph_index_or_unicode;
 
@@ -1221,7 +1224,8 @@
 			oSizes.oBitmap.nY = rasterInfo.top;
 			oSizes.oBitmap.nWidth = rasterInfo.width;
 			oSizes.oBitmap.nHeight = rasterInfo.rows;
-
+			// debugger;
+			console.log('AscFonts.FT_Get_Glyph_Render_Buffer----')
 			var rasterBitmap = AscFonts.FT_Get_Glyph_Render_Buffer(this.m_pFace, rasterInfo, true);
 
 			if (this.m_bNeedDoBold && this.m_bAntiAliasing && !isDisableNeedBold)
@@ -1457,11 +1461,15 @@
 			var pCurGlyph = pString.m_pGlyphsBuffer[0];
 			var ushUnicode = pCurGlyph.lUnicode;
 
+			//_cache_array已经渲染过的文字的缓存
 			var _cache_array = (this.m_bStringGID === false) ? this.m_arrCacheSizes : this.m_arrCacheSizesGid;
 
 			var charSymbolObj = _cache_array[ushUnicode];
 			if (undefined == charSymbolObj || (null == charSymbolObj.oBitmap && charSymbolObj.bBitmap === false))
 			{
+				//没有渲染过的文字
+				// debugger;
+				console.log('没有渲染过的文字调用CacheGlyph渲染',ushUnicode,_cache_array)
 				_cache_array[ushUnicode] = this.CacheGlyph(ushUnicode, true);
 				charSymbolObj = _cache_array[ushUnicode];
 			}

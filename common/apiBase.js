@@ -49,7 +49,7 @@
 	/** @constructor */
 	function baseEditorsApi(config, editorId)
 	{
-		debugger;
+		// debugger;
 		this.editorId      = editorId;
 		this.isLoadFullApi = false;
         this.modulesCount  = 0;
@@ -239,7 +239,8 @@
 
 	baseEditorsApi.prototype._init                           = function()
 	{
-		debugger;
+		// debugger;
+		console.log('baseEditorsApi._init')
 		if (window["AscDesktopEditor"])
 			window["AscDesktopEditor"]["CreateEditorApi"](this);
 
@@ -266,10 +267,10 @@
 
 			t.sync_EndAction(c_oAscAsyncActionType.BlockInteraction, c_oAscAsyncAction.UploadImage);
 		});
-		debugger;
 		AscCommon.loadSdk(this._editorNameById(), function()
 		{
-			debugger;
+			// debugger;
+			console.log('AscCommon.loadSdk')
 			t.isLoadFullApi = true;
 
 			t._onEndLoadSdk();
@@ -3181,7 +3182,8 @@
 	// signatures
 	baseEditorsApi.prototype.asc_AddSignatureLine2 = function(_obj)
 	{
-		debugger;
+		// debugger;
+		console.log('baseEditorsApi.asc_AddSignatureLine2',_obj)
 		var _w = 50;
 		var _h = 50;
 		var _w_pix = (_w * AscCommon.g_dKoef_mm_to_pix) >> 0;

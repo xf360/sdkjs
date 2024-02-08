@@ -276,6 +276,7 @@ function onLoadFontsModule(window, undefined)
 
 	AscFonts.FT_Open_Face = function(library, stream, face_index)
 	{
+		console.warn('调用freetype模块FT_Open_Face，加载下载完成的字体文件流')
 		return AscFonts.FT_Open_Face2(library, stream.data, stream.len, face_index);
 	};
 
@@ -370,9 +371,12 @@ function onLoadFontsModule(window, undefined)
 		errorObj["free"]();
 		return info;
 	};
-
+	//获取字形渲染数据 可设置是否保存到AscFonts.raster_memory中缓存
 	AscFonts.FT_Get_Glyph_Render_Buffer = function(face, rasterInfo, isCopyToRasterMemory)
 	{
+		// debugger;
+		console.log('获取字形渲染数据 可设置是否保存到AscFonts.raster_memory中缓存---AscFonts.FT_Get_Glyph_Render_Buffer',face, rasterInfo,)
+		//这里调用fontjs里面的FT_Get_Glyph_Render_Buffer方法加载字体（也就是调用freetype模块加载字体）
 		let buffer = AscFonts.FT_Get_Glyph_Render_Buffer2(face, rasterInfo.pitch * rasterInfo.rows);
 
 		if (!isCopyToRasterMemory)

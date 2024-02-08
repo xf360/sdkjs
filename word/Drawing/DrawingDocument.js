@@ -6784,9 +6784,10 @@ function CDrawingDocument()
 		}
 	};
 
-	// при загрузке документа - нужно понять какие шрифты используются
+	// при загрузке документа - нужно понять какие шрифты используются 下载文档时，需要了解使用了哪些字体
 	this.CheckFontNeeds = function()
 	{
+		console.log('DrawingDocument.js----CheckFontNeeds：下载文档时，需要了解使用了哪些字体')
 		var map_keys;
 		if (this.m_oWordControl.m_oLogicDocument)
 			map_keys = this.m_oWordControl.m_oLogicDocument.Document_Get_AllFontNames();

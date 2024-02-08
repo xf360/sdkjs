@@ -7672,6 +7672,8 @@ function BinaryFileReader(doc, openParams)
         //надо сбросить то, что остался после открытия документа(повторное открытие в Version History)
         pptx_content_loader.Clear(bClearStreamOnly);
 	}
+
+	//解析二进制 docy格式到对象
     this.ReadMainTable = function()
 	{	
         var res = c_oSerConstants.ReadOk;

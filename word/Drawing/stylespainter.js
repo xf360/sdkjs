@@ -203,6 +203,7 @@ CStylesPainter.prototype.GenerateDefaultStyles = function (_api, ds)
 
 CStylesPainter.prototype.GenerateDocumentStyles = function(_api)
 {
+	console.log('CStylesPainter.GenerateDocumentStyles')
 	if (!_api.WordControl.m_oLogicDocument)
 		return;
 
@@ -248,9 +249,10 @@ CStylesPainter.prototype.GenerateDocumentStyles = function(_api)
 
 			this.drawStyle(_api, graphics, _dr_style,
 				DocumentStyles.IsStyleDefaultByName(style.Name) ? AscCommon.translateManager.getValue(style.Name) : style.Name);
+			console.log('CStylesPainter.GenerateDocumentStyles',_canvas.toDataURL("image/png"))
 			this.docStyles[cur_index] = new AscCommon.CStyleImage(style.Name, AscCommon.c_oAscStyleImage.Document,
 				_canvas.toDataURL("image/png"), style.uiPriority);
-
+			
 			// алгоритм смены имени
 			if (style.Default)
 			{
@@ -281,6 +283,7 @@ CStylesPainter.prototype.GenerateDocumentStyles = function(_api)
 
 CStylesPainter.prototype.drawStyle = function(_api, graphics, style, styleName)
 {
+	
 	var ctx = graphics.m_oContext;
 	ctx.fillStyle = "#FFFFFF";
 	ctx.fillRect(0, 0, this.STYLE_THUMBNAIL_WIDTH, this.STYLE_THUMBNAIL_HEIGHT);
@@ -309,7 +312,7 @@ CStylesPainter.prototype.drawStyle = function(_api, graphics, style, styleName)
 		font.FontSize = textPr.FontSize;
 
 	graphics.SetFont(font);
-
+	console.log('graphics.SetFont---字体加载完成',font)
 	if (textPr.Color === undefined)
 		graphics.b_color1(0, 0, 0, 255);
 	else
@@ -359,6 +362,7 @@ CStylesPainter.prototype.drawStyle = function(_api, graphics, style, styleName)
 		ctx.stroke();
 
 		graphics.restore();
+		console.log('---CStylesPainter.drawStyle----',ctx.canvas.toDataURL())
 	}
 	else
 	{
@@ -380,6 +384,7 @@ CStylesPainter.prototype.drawStyle = function(_api, graphics, style, styleName)
 		var par = new Paragraph(editor.WordControl.m_oDrawingDocument, _dc, false);
 		var run = new ParaRun(par, false);
 		run.AddText(styleName);
+		
 
 		_dc.Internal_Content_Add(0, par, false);
 		par.Add_ToContent(0, run);
@@ -470,7 +475,8 @@ CStylesPainter.prototype.drawStyle = function(_api, graphics, style, styleName)
 		var baseline = par.Lines[0].Y;
 		par.Shift(0, off + 0.5, y + 0.75 * (b - y) - baseline);
 		par.Draw(0, graphics);
-
+		console.log('stylespainter.js---生成主体样式',styleName)
+		console.log('stylespainter.js---生成主体样式',graphics.m_oContext.canvas.toDataURL())
 		graphics.restore();
 
 		if (_api)

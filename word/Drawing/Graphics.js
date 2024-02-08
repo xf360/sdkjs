@@ -962,7 +962,7 @@ CGraphics.prototype =
         _last_font.SetUpName = font.FontFamily.Name;
         _last_font.SetUpSize = font.FontSize;
         _last_font.SetUpStyle = oFontStyle;
-
+        console.log('Graphics.js---SetFont:设置字体',font)
         g_fontApplication.LoadFont(_last_font.SetUpName, AscCommon.g_font_loader, _font_manager, font.FontSize, oFontStyle, this.m_dDpiX, this.m_dDpiY, this.m_oTransform, this.LastFontOriginInfo);
 
         var _mD = _last_font.SetUpMatrix;
@@ -1329,8 +1329,13 @@ CGraphics.prototype =
         try
         {
             console.log('从字体中加载汉字，汉字编码',codepoints);
+            let content=''
+            for(let item of codepoints){
+                content+=String.fromCharCode(item);
+            }
+            console.log('从字体中加载汉字，汉字内容',content)
             console.log('从字体中加载汉字，字库编码',text);
-            debugger;
+            // debugger;
             _font_manager.LoadString3C(text,_x,_y,codepoints);
         }
         catch(err)

@@ -55,7 +55,7 @@
         // динамическая подгрузка шрифтов
         this.ThemeLoader = null;
         this.Api = null;
-        this.fonts_loading = [];
+        this.fonts_loading = [];//字体下载列表
         this.bIsLoadDocumentFirst = false;
 
         // информация для загрузки по одному шрифту
@@ -76,12 +76,14 @@
             this.Api = api;
         };
 
-        // добавляем шрифт в список для загрузки
+        // добавляем шрифт в список для загрузки  将字体添加到下载列表
         this.AddLoadFonts = function(name, need_styles)
         {
+            
             var fontinfo = g_fontApplication.GetFontInfo(name);
             this.fonts_loading[this.fonts_loading.length] = fontinfo;
             this.fonts_loading[this.fonts_loading.length - 1].NeedStyles = (need_styles === undefined) ? 0x0F : need_styles;
+            console.log(`GlobalLoaders  ---AddLoadFonts 将字体【${name}】-【${fontinfo.indexR}】添加到下载列表`,name, fontinfo)
 			return fontinfo;
         };
         this.AddLoadFontsNotPick = function(info, need_styles)
@@ -91,6 +93,7 @@
         };
 
         // проверить все fontinfo из fonts_loading на нужность загрузки, и вернуть есть ли хоть один заново запущенный
+        //检查fonts_loading中的所有fontinfo是否需要下载，并返回是否有任何新运行的fontinfo，如果需要下载则调用LoadFontAsync从服务端请求数据
         this.CheckFontsNeedLoadingLoad = function()
         {
             let fonts = this.fonts_loading;
@@ -122,6 +125,7 @@
 
         this.LoadDocumentFonts = function(fonts)
         {
+            console.log('GlobalLoaders.js---LoadDocumentFonts：开始下载文档使用的字体列表',fonts)
             if (this.IsLoadDocumentFonts2)
                 return this.LoadDocumentFonts2(fonts);
 
@@ -157,8 +161,8 @@
 
             this.bIsLoadDocumentFirst = true;
 
-            this.CheckFontsNeedLoadingLoad();
-            this._LoadFonts();
+            this.CheckFontsNeedLoadingLoad();//检查字体是否需要下载
+            this._LoadFonts();//加载字体
         };
 
         this.LoadDocumentFonts2 = function(fonts, blockType, callback)
@@ -181,17 +185,21 @@
             else
                 this.ThemeLoader.asyncFontsStartLoaded();
 
-            this.CheckFontsNeedLoadingLoad();
-            this._LoadFonts();
+            this.CheckFontsNeedLoadingLoad();//检查字体是否需要下载，
+            this._LoadFonts();//加载字体
         };
 
         this._LoadFonts = function()
         {
+            console.log('GlobalLoaders.js----_LoadFonts 下载字体')
             if (this.bIsLoadDocumentFirst === true && 0 === this.perfStart && this.fonts_loading.length > 0)
                 this.perfStart = performance.now();
 
             if (0 === this.fonts_loading.length)
             {
+                debugger;
+                //fonts_loading字体已经加载完成
+                console.log('fonts_loading字体已经加载完成')
                 if (this.perfStart > 0)
                 {
                     let perfEnd = performance.now();
@@ -215,31 +223,34 @@
             }
 
             if (this.fonts_loading[0].CheckFontLoadStyles(this))
-            {
+            { //字体需要下载
                 let _t = this;
+                //设置定时器，定时查看字体是否下载完成
                 this.check_loaded_timer_id = setTimeout(function(){
                     _t.check_loaded_list();
                 }, 50);
             }
             else
             {
+                //字体已下载
                 if (this.bIsLoadDocumentFirst === true)
                 {
                     this.Api.OpenDocumentProgress.CurrentFont++;
                     this.Api.SendOpenProgress();
                 }
 
-                this.fonts_loading.shift();
+                this.fonts_loading.shift();//已下载的字体从列表中移除
                 this._LoadFonts();
             }
         };
 
         this.check_loaded_list = function()
         {
+            console.log('GlobalLoaders.js----check_loaded_lis:定时器---检查字体加载列表',this.fonts_loading)
             this.check_loaded_timer_id = -1;
             if (0 === this.fonts_loading.length)
             {
-                // значит асинхронно удалилось
+                // значит асинхронно удалилось 这意味着异步离开。
                 this._LoadFonts();
                 return;
             }
@@ -261,7 +272,7 @@
                     this.Api.SendOpenProgress();
                 }
 
-                this.fonts_loading.shift();
+                this.fonts_loading.shift();//已下载的字体从列表中移除
                 this._LoadFonts();
             }
         };

@@ -47,14 +47,14 @@
 			FontStyleStrikeout:  8
 		};
 
-	// создаем стрим по обычной base64 строке
+	// создаем стрим по обычной base64 строке 在Base64字符串中创建流
 	function CreateFontData2(input, len)
 	{
 		var memoryData = AscCommon.Base64.decode(input, false, len);
 		return new AscFonts.FontStream(memoryData, memoryData.length);
 	}
 
-	// создаем стрим по обычной строке
+	// создаем стрим по обычной строке 在普通字符串上创建流
 	function CreateFontData3(szSrc)
 	{
 		var srcLen = szSrc.length;
@@ -73,6 +73,7 @@
 	}
 
 	// создаем стрим по base64 строке, в начале которой идет префикс с информацией о длине стрима
+	//在base64字符串上创建流，以前缀开头，并提供流长度信息
 	function CreateFontData4(input)
 	{
 		var memoryData = AscCommon.Base64.decode(input, true);
@@ -1423,6 +1424,8 @@
 
 		Init : function()
 		{
+			// debugger;
+			console.log('CFontSelectList---init:解析g_fonts_selection_bin')
 			if (true == this.IsInit)
 				return;
 
@@ -1452,8 +1455,8 @@
 				}
 			}
 
-			// add languages
-			// 1) arabic
+			// add languages 各种语言的unicode编码范围
+			// 1) arabic 阿拉伯语
 			var _arabic_lang = new CLanguageFontSelect();
 			_arabic_lang.Type = LanguagesFontSelectTypes.Arabic;
 			_arabic_lang.Ranges.push(0x0600);
@@ -1471,7 +1474,7 @@
 			_arabic_lang.DefaultFont = "Tahoma";
 			this.Languages.push(_arabic_lang);
 
-			// 2) korean
+			// 2) korean 韩语
 			var _korean_lang = new CLanguageFontSelect();
 			_korean_lang.Type = LanguagesFontSelectTypes.Korean;
 			_korean_lang.Ranges.push(0x1100);
@@ -1487,7 +1490,7 @@
 			_korean_lang.DefaultFont = "Batang";
 			this.Languages.push(_korean_lang);
 
-			// 3) japan
+			// 3) japan 日语
 			var _japan_lang = new CLanguageFontSelect();
 			_japan_lang.Type = LanguagesFontSelectTypes.Japan;
 			_japan_lang.Ranges.push(0x4E00);
@@ -1512,7 +1515,7 @@
 			_japan_lang.FullSupportPages = true;
 			this.Languages.push(_japan_lang);
 
-			// 4) chinese http://stackoverflow.com/questions/1366068/whats-the-complete-range-for-chinese-characters-in-unicode
+			// 4) chinese 中文 http://stackoverflow.com/questions/1366068/whats-the-complete-range-for-chinese-characters-in-unicode
 			var _chinese_lang = new CLanguageFontSelect();
 			_chinese_lang.Type = LanguagesFontSelectTypes.Chinese;
 			_chinese_lang.Ranges.push(0x4E00);
@@ -2819,7 +2822,7 @@
 		this.FontPickerMap = {};
 
 		this.g_fontDictionary = new FD_FontDictionary();
-		this.g_fontSelections = new CFontSelectList();
+		this.g_fontSelections = new CFontSelectList();//选择的字体
 		this.DefaultIndex = 0;
 
 		this.NameToInterface = {};
@@ -2837,6 +2840,7 @@
 
 		this.LoadFont = function(name, font_loader, fontManager, fEmSize, lStyle, dHorDpi, dVerDpi, transform, objDst)
 		{
+			console.log('map.js----LoadFont:加载字体',name,font_loader, fontManager, fEmSize, lStyle, dHorDpi, dVerDpi, transform, objDst)
 			var _font = this.GetFontFileWeb(name, lStyle);
 			var font_name_index = AscFonts.g_map_font_index[_font.m_wsFontName];
 			if (undefined !== objDst)

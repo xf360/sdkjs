@@ -2691,7 +2691,7 @@ function CBinaryFileWriter()
 
                 _canvas.getContext("2d").drawImage(imgNatural, 0, 0, _canvas.width, _canvas.height);
                 _src = _canvas.toDataURL("image/png");
-                debugger;
+                // debugger;
                 console.log('prepareRasterImageIdForWrite',_src)
             }
         }

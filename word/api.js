@@ -34,7 +34,7 @@
 
 (function(window, document)
 {
-	debugger;
+	console.log('进入api.js')
 	// Import
 	var g_fontApplication = null;
 
@@ -869,7 +869,7 @@
 	function asc_docs_api(config)
 	{
 		console.log('jssdk：实例化编辑器')
-		debugger;
+		// debugger;
 		AscCommon.baseEditorsApi.call(this, config, AscCommon.c_oEditorId.Word);
 
 		/************ private!!! **************/
@@ -1273,7 +1273,7 @@ background-repeat: no-repeat;\
 
 	asc_docs_api.prototype.CreateComponents = function()
 	{
-		debugger;
+		// debugger;
 		console.log('sdkjs创建组件内容：---- CreateComponents')
 		this.asc_setSkin(this.skinObject);
 		delete this.skinObject;
@@ -1531,19 +1531,24 @@ background-repeat: no-repeat;\
 	};
 	function AfterOpenDocument(data, size)
 	{
+		// debugger;
+		console.log('从二进制打开文件后：AfterOpenDocument')
 		if (History && History.Update_FileDescription)
 			History.Update_FileDescription(data, size);
 
 		g_oIdCounter.Set_Load(false);
 		this.LoadedObject = 1;
 
-		// проверяем какие шрифты нужны
+		// проверяем какие шрифты нужны 检查需要哪些字体
+		console.log('检查需要哪些字体')
 		var StylesPainter = new AscCommonWord.CStylesPainter();
 		StylesPainter.CheckStylesNames(this, this.LoadedObjectDS);
 
 		this.WordControl.m_oDrawingDocument.CheckFontNeeds();
 		AscCommon.pptx_content_loader.CheckImagesNeeds(this.WordControl.m_oLogicDocument);
 
+		//加载字体
+		console.log('api.js----AfterOpenDocument:所需字体列表解析完成，开始下载字体',this.WordControl.m_oLogicDocument.Fonts)
 		this.FontLoader.LoadDocumentFonts(this.WordControl.m_oLogicDocument.Fonts, false);
 
 		AscFonts.IsCheckSymbols = false;
@@ -7477,6 +7482,7 @@ background-repeat: no-repeat;\
 	};
 	asc_docs_api.prototype.asyncFontsDocumentEndLoaded   = function(blockType)
 	{
+		console.log('asc_docs_api.asyncFontsDocumentEndLoaded---字体下载完成：')
 		// все, шрифты загружены. Теперь нужно подгрузить картинки
 		if (this.isPasteFonts_Images)
 			this.sync_EndAction(c_oAscAsyncActionType.BlockInteraction, c_oAscAsyncAction.LoadFont);
@@ -7989,7 +7995,7 @@ background-repeat: no-repeat;\
 		else
 		{
 			console.log('从zip打开文件',file)
-			debugger;
+			// debugger;
 			this.isOpenOOXInBrowser = this["asc_isSupportFeature"]("ooxml") && AscCommon.checkOOXMLSignature(file.data);
 			if (this.isOpenOOXInBrowser)
 			{
@@ -9479,7 +9485,7 @@ background-repeat: no-repeat;\
 	asc_docs_api.prototype._onEndLoadSdk = function()
 	{
 		console.log('sdk加载完成：_onEndLoadSdk')
-		debugger;
+		// debugger;
 		AscCommon.baseEditorsApi.prototype._onEndLoadSdk.call(this);
 
 		History           = AscCommon.History;
@@ -9496,7 +9502,7 @@ background-repeat: no-repeat;\
 		PasteElementsId.g_bIsDocumentCopyPaste = true;
 
 		this.CreateComponents();
-		debugger;
+		// debugger;
 		this.WordControl.Init();
 
 		if (this.tmpFontRenderingMode)

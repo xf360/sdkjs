@@ -281,7 +281,7 @@ function CEditorPage(api)
 
 	this.Init = function()
 	{
-		debugger;
+		// debugger;
 		console.log('sdkjs构建编辑器编辑区')
 		this.m_oBody = AscCommon.CreateControlContainer(this.Name);
 
@@ -485,7 +485,7 @@ function CEditorPage(api)
 	// events ---
 	this.initEvents = function()
 	{
-		debugger;
+		// debugger;
 		console.log('绑定事件initEvents')
 		this.arrayEventHandlers[0] = new AscCommon.button_eventHandlers("", "0px 0px", "0px -16px", "0px -32px", this.m_oPanelRight_buttonRulers, this.onButtonRulersClick);
 		this.arrayEventHandlers[1] = new AscCommon.button_eventHandlers("", "0px 0px", "0px -16px", "0px -32px", this.m_oPanelRight_buttonPrevPage, this.onPrevPage);

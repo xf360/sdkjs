@@ -42,7 +42,7 @@ CTable.prototype.ReDraw = function()
 };
 CTable.prototype.Draw = function(CurPage, pGraphics, isDrawContent)
 {
-    console.log('CTable.Draw----绘制table')
+    // console.log('CTable.Draw----绘制table')
     if (CurPage < 0 || CurPage >= this.Pages.length)
         return 0;
 
@@ -77,7 +77,8 @@ CTable.prototype.Draw = function(CurPage, pGraphics, isDrawContent)
     var bIsSmartGrForcing = false;
     if (pGraphics.StartCheckTableDraw)
         bIsSmartGrForcing = pGraphics.StartCheckTableDraw();
-    debugger;
+    // debugger;
+    console.log('tabledraw.js---Draw:绘制表格 table:',CurPage, pGraphics, isDrawContent)
     //-------------------------------------------------------------------------------------
     // 1. Сначала заливаем таблицу и если есть Spacing, тогда обводим внешнюю рамку таблицы
     // 1.首先填充表，如果有空隙，然后绘制表的外部框架
